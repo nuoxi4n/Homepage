@@ -1,0 +1,74 @@
+{
+  "profile": {
+    "name": "Hello I' m <span class=\"gradientText\">nuoxian</span>",
+    "logo": "https://q1.qlogo.cn/g?b=qq&k=ePKdtnkhdrYy1HD4B2gc2g&s=640",
+    "logokuang": "./static/img/logokuang.png",
+    "location": "<i class=\"fa-solid fa-location-crosshairs\"></i> China-Jiangxi",
+    "career": "<i class=\"fa-solid fa-suitcase\"></i> 无业游民",
+    "description": "🌱 来自 <span class=\"purpleText textBackground\">中国</span> 的男孩。",
+    "tags": ["网瘾", "网页", "linux", "前端"]
+  },
+  "social": [
+    {
+      "name": "GitHub",
+      "icon": "fab fa-github",
+      "url": "https://github.com/nuoxi4n"
+    },
+    {
+      "name": "Email",
+      "icon": "fa-solid fa-envelope",
+      "url": "mailto:nuo_xian@qq.com"
+    },
+    {
+      "name": "赞助",
+      "icon": "fa-solid fa-circle-dollar-to-slot",
+      "onclick": "pop('./static/img/WeChat_Pay.png')"
+    },
+    {
+      "name": "QQ",
+      "icon": "fab fa-qq",
+      "onclick": "pop('./static/img/qq_qun.jpg')"
+    }
+  ],
+  "projects_name": "<i class=\"fa-solid fa-code\"></i> 项目",
+  "projects": {
+    "sites": [
+      {
+        "title": "我的项目",
+        "description": "这里是项目描述...",
+        "url": "https://nuoxiana.cn",
+        "image": "./static/img/i1.png"
+      }
+    ],
+    "sites1": [
+      {
+        "title": "我的第二个项目",
+        "description": "这里是第二个项目描述...",
+        "url": "https://nuoxiana.cn",
+        "image": "./static/img/i2.png"
+      }
+    ]
+  },
+  "skill_name": "<i class=\"fa-solid fa-mug-saucer\"></i> 技术栈",
+  "skill": {
+    "skillPC": "https://skillicons.dev/icons?i=js,html,css,php,apple,azure,cpp,discord,docker,git,github,gitlab,gmail,godot,jquery,linux,md,mysql,nginx,nodejs,npm,nuxtjs,ps,pnpm,postgres,powershell,pr,py,redis,twitter,unity,unreal,v,vercel,vite,vscode,vue,windows,wordpress&perline=18",
+    "SkillWap": "https://skillicons.dev/icons?i=js,html,css,php,apple,azure,cpp,discord,docker,git,github,gitlab,gmail,godot,jquery,linux,md,mysql,nginx,nodejs,npm,nuxtjs,ps,pnpm,postgres,powershell,pr,py,redis,twitter,unity,unreal,v,vercel,vite,vscode,vue,windows,wordpress&perline=8"
+  },
+  "github-contribution-grid-snake": {
+    "light": "https://raw.githubusercontent.com/nuoxi4n/nuoxi4n/main/assets/github-contribution-grid-snake.svg",
+    "dark": "https://raw.githubusercontent.com/nuoxi4n/nuoxi4n/main/assets/github-contribution-grid-snake-dark.svg"
+  },
+  "timeline": [
+    {
+      "date": "...",
+      "event": "..."
+    },
+    {
+      "date": "1999.9.9",
+      "event": "此处是时间线"
+    }
+  ],
+  "footer": {
+    "test": "这是footer的内容"
+  }
+}
