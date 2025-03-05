@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh-CN">
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,84 +7,107 @@
   <link rel="icon" href="./static/img/favicon.ico">
   <meta name="description" content="诺仙仙君 - Live for my faith.">
   <meta name="keywords" content="nuoxian,诺仙仙君,个人主页,主页,home,index,homepage,page">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <meta name="viewport" 
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  
+  <!-- 本地样式 -->
   <link rel="stylesheet" href="./static/css/style.css">
   <link rel="stylesheet" href="./static/css/root.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  
+  <!-- Font Awesome -->
+  <link rel="stylesheet" 
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" 
+        integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" 
+        crossorigin="anonymous" 
+        referrerpolicy="no-referrer">
 </head>
 
 <body>
+  <!-- 加载动画 -->
   <div id="loading">
     <div id="loading-center"></div>
   </div>
+
+  <!-- 背景滤镜 -->
   <div class="filter"></div>
+
+  <!-- 主内容 -->
   <div class="main">
+    <!-- 左侧栏 -->
     <div class="left">
-      <!-- 头像 -->
       <div class="logo" data-config-style="background-image:profile.logo">
-        <!-- 头像框 -->
-        <img data-config-src="profile.logokuang" style="position: absolute;top:-15%;left:-10%;width: 120%; aspect-ratio: 1/1;">
+        <img data-config-src="profile.logokuang" 
+             style="position: absolute; top: -15%; left: -10%; width: 120%; aspect-ratio: 1/1;">
       </div>
+
       <div class="left-div left-des">
-        <!-- 位置 -->
         <div class="left-des-item" data-config-html="profile.location">
           <i class="fa-solid fa-location-dot fa-xs"></i>
         </div>
-        <!-- 职业 -->
         <div class="left-des-item" data-config-html="profile.career">
           <i class="fa-solid fa-suitcase fa-xs"></i>
         </div>
       </div>
-      <!-- 标签 -->
+
       <div class="left-div left-tag" data-config-array="profile.tags"></div>
-      <!-- 时间线 -->
+
       <div class="left-div left-time">
         <ul id="line" data-config-array="timeline"></ul>
       </div>
     </div>
+
+    <!-- 右侧内容 -->
     <div class="right">
       <header>
-        <!-- 头像 -->
         <div class="index-logo" data-config-style="background-image:profile.logo">
-          <!-- 头像框 -->
-          <img data-config-src="profile.logokuang" style="position: absolute;top:-15%;left:-10%;width: 120%; aspect-ratio: 1/1;">
+          <img data-config-src="profile.logokuang" 
+               style="position: absolute; top: -15%; left: -10%; width: 120%; aspect-ratio: 1/1;">
         </div>
-        <!-- 昵称 -->
+
         <div class="welcome" data-config-html="profile.name"></div>
-        <!-- 简介 -->
         <div class="description" data-config-html="profile.description"></div>
-        <!-- 社交按钮，默认添加主题模式开关 -->
+
         <div class="iconContainer" data-config-array="social"></div>
-        <!-- Github贪吃蛇活动贡献图 -->
+
         <div class="Github-Active">
-          <img class="theme-svg light" data-config-src-light="github-contribution-grid-snake.light" data-config-src-dark="github-contribution-grid-snake.dark" alt="Github贪吃蛇活动贡献图-Light">
-          <img class="theme-svg dark" data-config-src-light="github-contribution-grid-snake.light" data-config-src-dark="github-contribution-grid-snake.dark" alt="Github贪吃蛇活动贡献图-Dark">
+          <img class="theme-svg light" 
+               data-config-src-light="github-contribution-grid-snake.light" 
+               data-config-src-dark="github-contribution-grid-snake.dark" 
+               alt="Github贪吃蛇活动贡献图-Light">
+          <img class="theme-svg dark" 
+               data-config-src-light="github-contribution-grid-snake.light" 
+               data-config-src-dark="github-contribution-grid-snake.dark" 
+               alt="Github贪吃蛇活动贡献图-Dark">
         </div>
       </header>
+
       <content>
-        <!-- 项目名称 -->
         <div class="title" data-config-html="projects_name"></div>
-        <!-- 项目 -->
         <div class="projectList" data-config-array="projects"></div>
-        <!-- 技术栈名称 -->
+
         <div class="title" data-config-html="skill_name"></div>
-        <!-- 技术栈 -->
+        
         <div class="skill">
-            <img id="skillPc" data-config-src="skill.skillPC">
-            <img id="skillWap" data-config-src="skill.SkillWap">
+          <img id="skillPc" data-config-src="skill.skillPC">
+          <img id="skillWap" data-config-src="skill.SkillWap">
         </div>
       </content>
+    </div>
   </div>
+
+  <!-- 页脚 -->
+  <footer data-config-html="footer"></footer>
+
+  <!-- 图片弹窗 -->
+  <div class="imgbox">
+    <div class="imgbox-main">
+      <img class="imgbox-img" src="" alt="">
+    </div>
   </div>
-<!-- 脚页 -->
-<footer data-config-html="footer"></footer>
-<div class="imgbox">
-  <div onclick="" class="imgbox-main">
-    <img class="imgbox-img" src="" alt="" srcset="">
-  </div>
-</div>
-<script src="./customScripts.js"></script>
-<script src="./config-loader.js"></script>
-<script src="./static/js/script.js"> </script>
+
+  <!-- 脚本加载 -->
+  <script src="./customScripts.js"></script>
+  <script src="./config-loader.js"></script>
+  <script src="./static/js/script.js"></script>
 </body>
 </html>

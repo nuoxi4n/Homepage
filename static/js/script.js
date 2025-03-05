@@ -1,4 +1,8 @@
-console.log("\n %c zyyo.net & nuoxian %c www.nuoxiana.cn", "color:#777777;background:linear-gradient(to right,#ebf2ed,#e5ebee,#f0e5c7,#f8eef0);padding:5px 0;", "color:#fff;background:#f8f8f8;padding:5px 10px 5px 0px;");
+console.log(
+  "\n %c zyyo.net & nuoxian %c www.nuoxiana.cn",
+  "color:#777777;background:linear-gradient(to right,#ebf2ed,#e5ebee,#f0e5c7,#f8eef0);padding:5px 0;",
+  "color:#fff;background:#f8f8f8;padding:5px 10px 5px 0px;"
+);
 
 document.addEventListener('contextmenu', function(event) {
   event.preventDefault();
@@ -18,61 +22,63 @@ function handleCancel(event) {
 }
 
 document.addEventListener('DOMContentLoaded', function() {
-    var buttons = document.querySelectorAll('.projectItem');
-    buttons.forEach(function(button) {
-        button.addEventListener('mousedown', handlePress);
-        button.addEventListener('mouseup', handleRelease);
-        button.addEventListener('mouseleave', handleCancel);
-        button.addEventListener('touchstart', handlePress);
-        button.addEventListener('touchend', handleRelease);
-        button.addEventListener('touchcancel', handleCancel);
-    });
+  var buttons = document.querySelectorAll('.projectItem');
+  buttons.forEach(function(button) {
+    button.addEventListener('mousedown', handlePress);
+    button.addEventListener('mouseup', handleRelease);
+    button.addEventListener('mouseleave', handleCancel);
+    button.addEventListener('touchstart', handlePress);
+    button.addEventListener('touchend', handleRelease);
+    button.addEventListener('touchcancel', handleCancel);
+  });
 });
 
 function initFPS() {
-    var fpsElement = document.createElement('div');
-    fpsElement.id = 'fps';
-    fpsElement.style.cssText = `
-        z-index: 10000;
-        position: fixed;
-        left: 10px;
-        bottom: 10px;
-        font-family: monospace;
-        background: rgba(0,0,0,0.7);
-        color: #00ff00;
-        padding: 5px 10px;
-        border-radius: 3px;
-    `;
-    document.body.insertBefore(fpsElement, document.body.firstChild);
+  var fpsElement = document.createElement('div');
+  fpsElement.id = 'fps';
+  fpsElement.style.cssText = `
+    z-index: 10000;
+    position: fixed;
+    left: 10px;
+    bottom: 10px;
+    font-family: monospace;
+    background: rgba(0,0,0,0.7);
+    color: #00ff00;
+    padding: 5px 10px;
+    border-radius: 3px;
+  `;
+  document.body.insertBefore(fpsElement, document.body.firstChild);
 
-    var requestAnimationFrame = window.requestAnimationFrame ||
-        window.webkitRequestAnimationFrame ||
-        window.mozRequestAnimationFrame ||
-        window.oRequestAnimationFrame ||
-        window.msRequestAnimationFrame;
+  var requestAnimationFrame = window.requestAnimationFrame ||
+                              window.webkitRequestAnimationFrame || 
+                              window.mozRequestAnimationFrame ||
+                              window.oRequestAnimationFrame || 
+                              window.msRequestAnimationFrame;
 
-    var fps = 0, last = Date.now(), frameCount = 0;
+  var fps = 0, 
+      last = Date.now(), 
+      frameCount = 0;
 
-    function update() {
-        frameCount++;
-        var now = Date.now();
-        var delta = now - last;
+  function update() {
+    frameCount++;
+    var now = Date.now();
+    var delta = now - last;
 
-        if (delta >= 1000) {
-            fps = Math.round((frameCount * 1000) / delta);
-            frameCount = 0;
-            last = now;
-        }
-
-        fpsElement.textContent = `FPS: ${fps}`;
-        requestAnimationFrame(update);
+    if (delta >= 1000) {
+      fps = Math.round((frameCount * 1000) / delta);
+      frameCount = 0;
+      last = now;
     }
 
-    if (requestAnimationFrame) {
-        requestAnimationFrame(update);
-    } else {
-        console.warn('requestAnimationFrame 不支持');
-    }
+    fpsElement.textContent = `FPS: ${fps}`;
+    requestAnimationFrame(update);
+  }
+
+  if (requestAnimationFrame) {
+    requestAnimationFrame(update);
+  } else {
+    console.warn('requestAnimationFrame 不支持');
+  }
 }
 
 // 弹窗功能
@@ -124,34 +130,34 @@ function getCookie(name) {
 
 // 主题切换功能（等待配置加载完成）
 window.addEventListener('configLoaded', function() {
-    const themeSwitch = document.getElementById('myonoffswitch');
-    const html = document.querySelector('html');
-    let themeState = getCookie("themeState") || "Light";
-    
-    if (window.debugConfig?.showFPS) {
-        initFPS();
-    }
+  const themeSwitch = document.getElementById('myonoffswitch');
+  const html = document.querySelector('html');
+  let themeState = getCookie("themeState") || "Light";
 
-    function updateTheme(theme) {
-        themeState = theme;
-        html.dataset.theme = theme;
-        setCookie("themeState", theme, 365);
-        themeSwitch.checked = theme === 'Light';
-        
-        // 强制重绘保证动画触发
-        document.querySelectorAll('.theme-svg').forEach(svg => {
-            svg.offsetWidth;
-        });
-    }
+  if (window.debugConfig?.showFPS) {
+    initFPS();
+  }
 
-    if (themeSwitch) {
-        themeSwitch.addEventListener('change', () => {
-            updateTheme(themeState === 'Dark' ? 'Light' : 'Dark');
-        });
-        
-        // 初始化主题状态
-        updateTheme(themeState === 'Dark' ? 'Dark' : 'Light');
-}
+  function updateTheme(theme) {
+    themeState = theme;
+    html.dataset.theme = theme;
+    setCookie("themeState", theme, 365);
+    themeSwitch.checked = theme === 'Light';
+
+    // 强制重绘保证动画触发
+    document.querySelectorAll('.theme-svg').forEach(svg => {
+      svg.offsetWidth;
+    });
+  }
+
+  if (themeSwitch) {
+    themeSwitch.addEventListener('change', () => {
+      updateTheme(themeState === 'Dark' ? 'Light' : 'Dark');
+    });
+
+    // 初始化主题状态
+    updateTheme(themeState === 'Dark' ? 'Dark' : 'Light');
+  }
 });
 
 // 加载动画

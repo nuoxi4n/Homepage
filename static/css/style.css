@@ -491,6 +491,18 @@ html[data-theme="Dark"] .theme-svg.dark {
   transform: translateY(-2px);
 }
 
+.projectItem:hover .projectItemLeft {
+  width: 100%;
+}
+
+.projectItem:hover .projectItemRight {
+  width: 0%;
+}
+
+.projectItem:hover .projectItemRight img {
+  transform: rotate(40deg);
+}
+
 .projectItemLeft {
   width: 80%;
   height: 100%;
