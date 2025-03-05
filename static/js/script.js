@@ -78,18 +78,18 @@ function toggleClass(selector, className) {
 }
 
 function pop(imageURL) {
-  var tcMainElement = document.querySelector(".tc-img");
+  var tcMainElement = document.querySelector(".imgbox-img");
   if (imageURL) tcMainElement.src = imageURL;
-  toggleClass(".tc-main", "active");
-  toggleClass(".tc", "active");
+  toggleClass(".imgbox-main", "active");
+  toggleClass(".imgbox", "active");
 }
 
 document.addEventListener('DOMContentLoaded', function() {
-  var tc = document.querySelector('.tc');
-  var tc_main = document.querySelector('.tc-main');
-  if (tc && tc_main) {
-    tc.addEventListener('click', pop);
-    tc_main.addEventListener('click', function(e) {
+  var imgbox = document.querySelector('.imgbox');
+  var imgbox_main = document.querySelector('.imgbox-main');
+  if (imgbox && imgbox_main) {
+    imgbox.addEventListener('click', pop);
+    imgbox_main.addEventListener('click', function(e) {
       e.stopPropagation();
     });
   }
@@ -118,35 +118,30 @@ function getCookie(name) {
 
 // 主题切换功能（等待配置加载完成）
 window.addEventListener('configLoaded', function() {
-    const Checkbox = document.getElementById('myonoffswitch');
+    const themeSwitch = document.getElementById('myonoffswitch');
     const html = document.querySelector('html');
     let themeState = getCookie("themeState") || "Light";
-    const tanChiShe = document.getElementById("tanChiShe");
 
-    function updateSnakeImage(theme) {
-        if (window.currentConfig['github-contribution-grid-snake']) {
-            tanChiShe.src = window.currentConfig['github-contribution-grid-snake'][theme.toLowerCase()];
-        }
-    }
-
-    function changeTheme(theme) {
+    function updateTheme(theme) {
         themeState = theme;
         html.dataset.theme = theme;
         setCookie("themeState", theme, 365);
-        updateSnakeImage(theme);
-        if (Checkbox) Checkbox.checked = theme === 'Light';
+        themeSwitch.checked = theme === 'Light';
+        
+        // 强制重绘保证动画触发
+        document.querySelectorAll('.theme-svg').forEach(svg => {
+            svg.offsetWidth;
+        });
     }
 
-    if (Checkbox) {
-        Checkbox.addEventListener('change', () => {
-            changeTheme(themeState === 'Dark' ? 'Light' : 'Dark');
+    if (themeSwitch) {
+        themeSwitch.addEventListener('change', () => {
+            updateTheme(themeState === 'Dark' ? 'Light' : 'Dark');
         });
-        changeTheme(themeState);
-    }
-    
-    if (themeState == "Dark") {
-        Checkbox.checked = false;
-    }
+        
+        // 初始化主题状态
+        updateTheme(themeState === 'Dark' ? 'Dark' : 'Light');
+}
 });
 
 // 加载动画

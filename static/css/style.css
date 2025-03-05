@@ -429,19 +429,44 @@ body {
   background: var(--item_hover_color);
 }
 
-.tanChiShe {
+.Github-Active {
+  position: relative;
   width: 85%;
+  height: 200px;
 }
 
-.tanChiShe img {
+.Github-Active img {
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
 
+.theme-svg {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: opacity;
+}
+
+.theme-svg.light {
+  opacity: 1;
+}
+
+html[data-theme="Dark"] .theme-svg.light {
+  opacity: 0;
+}
+
+html[data-theme="Dark"] .theme-svg.dark {
+  opacity: 1;
+}
+
 .title {
   display: flex;
   align-items: center;
+  gap: 8px;
   font-size: 26px;
   font-weight: 800;
   margin: 20px 0;
@@ -637,7 +662,7 @@ footer {
     width: 100%;
   }
 
-  .tanChiShe {
+  .Github-Active {
     width: 100%;
   }
 
@@ -683,7 +708,7 @@ footer {
 
 
 
-.tc {
+.imgbox {
   position: fixed;
   display: flex;
   visibility: hidden;
@@ -699,7 +724,7 @@ footer {
   flex-direction: column;
 }
 
-.tc-main {
+.imgbox-main {
   z-index: 100000;
 
   width: 80%;
@@ -717,16 +742,16 @@ footer {
 
 }
 
-.tc-img {
+.imgbox-img {
   width: 100%;
   height: 100%;
 }
 
-.tc.active {
+.imgbox.active {
   visibility: visible;
 }
 
-.tc-main.active {
+.imgbox-main.active {
   transform: translateY(0) scale(1);
 
 }

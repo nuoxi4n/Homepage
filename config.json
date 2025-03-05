@@ -55,8 +55,8 @@
     "SkillWap": "https://skillicons.dev/icons?i=js,html,css,php,apple,azure,cpp,discord,docker,git,github,gitlab,gmail,godot,jquery,linux,md,mysql,nginx,nodejs,npm,nuxtjs,ps,pnpm,postgres,powershell,pr,py,redis,twitter,unity,unreal,v,vercel,vite,vscode,vue,windows,wordpress&perline=8"
   },
   "github-contribution-grid-snake": {
-    "light": "https://raw.githubusercontent.com/nuoxi4n/nuoxi4n/main/assets/github-contribution-grid-snake.svg",
-    "dark": "https://raw.githubusercontent.com/nuoxi4n/nuoxi4n/main/assets/github-contribution-grid-snake-dark.svg"
+    "light": "https://raw.gitmirror.com/nuoxi4n/nuoxi4n/main/assets/github-contribution-grid-snake.svg",
+    "dark": "https://raw.gitmirror.com/nuoxi4n/nuoxi4n/main/assets/github-contribution-grid-snake-dark.svg"
   },
   "timeline": [
     {

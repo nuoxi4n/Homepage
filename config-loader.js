@@ -97,7 +97,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function processStyleAttributes(config) {
-        document.querySelectorAll('[data-config-style]').forEach(el => {
+      document.querySelectorAll('[data-config-style]').forEach(el => {
             const [styleProp, dataPath] = el.dataset.configStyle.split(':');
             const value = getConfigValue(config, dataPath);
             if (value) el.style[styleProp] = `url('${value}')`;
@@ -107,12 +107,27 @@ document.addEventListener('DOMContentLoaded', function() {
             const value = getConfigValue(config, el.dataset.configSrc);
             if (value) el.src = value;
         });
+        
+        document.querySelectorAll('[data-config-src-light],[data-config-src-dark]').forEach(el => {
+            const lightSrc = getConfigValue(config, el.dataset.configSrcLight);
+            const darkSrc = getConfigValue(config, el.dataset.configSrcDark);
+            
+            if (el.classList.contains('light')) {
+                el.src = lightSrc;
+                // 预加载暗色图片
+                new Image().src = darkSrc; 
+            } else {
+                el.src = darkSrc;
+                // 预加载亮色图片
+                new Image().src = lightSrc;
+            }
+        });
     }
 
     function updateFooter(config) {
         const footer = document.querySelector('footer');
         if (config.footer) {
-            footer.innerHTML = Object.values(config.footer).join('<br>');
+          footer.innerHTML = Object.values(config.footer).join('<br>');
         }
     }
     
