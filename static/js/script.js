@@ -18,56 +18,62 @@ function handleCancel(event) {
 }
 
 document.addEventListener('DOMContentLoaded', function() {
-  var buttons = document.querySelectorAll('.projectItem');
-  buttons.forEach(function(button) {
-    button.addEventListener('mousedown', handlePress);
-    button.addEventListener('mouseup', handleRelease);
-    button.addEventListener('mouseleave', handleCancel);
-    button.addEventListener('touchstart', handlePress);
-    button.addEventListener('touchend', handleRelease);
-    button.addEventListener('touchcancel', handleCancel);
-  });
-  var fpsElement = document.createElement('div');
-  fpsElement.id = 'fps';
-  fpsElement.style.zIndex = '10000';
-  fpsElement.style.position = 'fixed';
-  fpsElement.style.left = '0';
-  document.body.insertBefore(fpsElement, document.body.firstChild);
+    var buttons = document.querySelectorAll('.projectItem');
+    buttons.forEach(function(button) {
+        button.addEventListener('mousedown', handlePress);
+        button.addEventListener('mouseup', handleRelease);
+        button.addEventListener('mouseleave', handleCancel);
+        button.addEventListener('touchstart', handlePress);
+        button.addEventListener('touchend', handleRelease);
+        button.addEventListener('touchcancel', handleCancel);
+    });
+});
 
-  var showFPS = (function () {
+function initFPS() {
+    var fpsElement = document.createElement('div');
+    fpsElement.id = 'fps';
+    fpsElement.style.cssText = `
+        z-index: 10000;
+        position: fixed;
+        left: 10px;
+        bottom: 10px;
+        font-family: monospace;
+        background: rgba(0,0,0,0.7);
+        color: #00ff00;
+        padding: 5px 10px;
+        border-radius: 3px;
+    `;
+    document.body.insertBefore(fpsElement, document.body.firstChild);
+
     var requestAnimationFrame = window.requestAnimationFrame ||
-    window.webkitRequestAnimationFrame ||
-    window.mozRequestAnimationFrame ||
-    window.oRequestAnimationFrame ||
-    window.msRequestAnimationFrame ||
-    function (callback) {
-      window.setTimeout(callback, 1000 / 60);
-    };
+        window.webkitRequestAnimationFrame ||
+        window.mozRequestAnimationFrame ||
+        window.oRequestAnimationFrame ||
+        window.msRequestAnimationFrame;
 
-    var fps = 0,
-      last = Date.now(),
-      offset, step, appendFps;
+    var fps = 0, last = Date.now(), frameCount = 0;
 
-      step = function () {
-        offset = Date.now() - last;
-        fps += 1;
-        
-        if (offset >= 1000) {
-          last += offset;
-          appendFps(fps);
-          fps = 0;
+    function update() {
+        frameCount++;
+        var now = Date.now();
+        var delta = now - last;
+
+        if (delta >= 1000) {
+            fps = Math.round((frameCount * 1000) / delta);
+            frameCount = 0;
+            last = now;
         }
 
-        requestAnimationFrame(step);
-      };
+        fpsElement.textContent = `FPS: ${fps}`;
+        requestAnimationFrame(update);
+    }
 
-      appendFps = function (fpsValue) {
-        fpsElement.textContent = 'FPS: ' + fpsValue;
-      };
-
-      step();
-  })();
-});
+    if (requestAnimationFrame) {
+        requestAnimationFrame(update);
+    } else {
+        console.warn('requestAnimationFrame 不支持');
+    }
+}
 
 // 弹窗功能
 function toggleClass(selector, className) {
@@ -121,6 +127,10 @@ window.addEventListener('configLoaded', function() {
     const themeSwitch = document.getElementById('myonoffswitch');
     const html = document.querySelector('html');
     let themeState = getCookie("themeState") || "Light";
+    
+    if (window.debugConfig?.showFPS) {
+        initFPS();
+    }
 
     function updateTheme(theme) {
         themeState = theme;

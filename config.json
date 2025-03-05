@@ -1,4 +1,7 @@
 {
+  "debug": {
+    "showFPS": true
+  },
   "profile": {
     "name": "Hello I' m <span class=\"gradientText\">nuoxian</span>",
     "logo": "https://q1.qlogo.cn/g?b=qq&k=ePKdtnkhdrYy1HD4B2gc2g&s=640",
@@ -70,5 +73,11 @@
   ],
   "footer": {
     "test": "这是footer的内容"
-  }
+  },
+  "customScripts": [
+    {
+      "name": "百度统计",
+      "code": "var _hmt = _hmt || [];\n(function() {\nvar hm = document.createElement(\"script\");\n  hm.src = \"https://hm.baidu.com/hm.js?ab3227177adb00cd1709912d7b023344\";\n  var s = document.getElementsByTagName(\"script\")[0]; \n  s.parentNode.insertBefore(hm, s);})();"
+    }
+  ]
 }

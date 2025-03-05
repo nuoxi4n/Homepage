@@ -20,6 +20,8 @@ document.addEventListener('DOMContentLoaded', function() {
             // 处理页脚
             updateFooter(config);
             
+            processDebugConfig(config);
+            
             // 处理完成后触发配置加载完成事件
             window.dispatchEvent(new CustomEvent('configLoaded'));
         })
@@ -122,6 +124,10 @@ document.addEventListener('DOMContentLoaded', function() {
                 new Image().src = lightSrc;
             }
         });
+    }
+
+    function processDebugConfig(config) {
+        window.debugConfig = config.debug || {};
     }
 
     function updateFooter(config) {
