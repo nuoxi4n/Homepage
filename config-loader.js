@@ -15,6 +15,7 @@ document.addEventListener('DOMContentLoaded', function() {
       processStyleAttributes(config);
       // 处理页脚
       updateFooter(config);
+      // 处理DeBug
       processDebugConfig(config);
 
       // 处理完成后触发配置加载完成事件
@@ -106,19 +107,20 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     document.querySelectorAll('[data-config-src-light],[data-config-src-dark]').forEach(el => {
-      const lightSrc = getConfigValue(config, el.dataset.configSrcLight);
-      const darkSrc = getConfigValue(config, el.dataset.configSrcDark);
-
-      if (el.classList.contains('light')) {
-        el.src = lightSrc;
-        // 预加载暗色图片
-        new Image().src = darkSrc; 
-      } else {
-        el.src = darkSrc;
-        // 预加载亮色图片
-        new Image().src = lightSrc;
-      }
-    });
+  const lightSrc = getConfigValue(config, el.dataset.configSrcLight);
+  const darkSrc = getConfigValue(config, el.dataset.configSrcDark);
+  
+  // 初始化时设置默认主题图片
+  if (document.documentElement.getAttribute('data-theme') === 'Dark') {
+    el.src = darkSrc;
+  } else {
+    el.src = lightSrc;
+  }
+  
+  // 预加载两种主题图片
+  new Image().src = lightSrc;
+  new Image().src = darkSrc;
+});
   }
 
   function processDebugConfig(config) {
@@ -132,7 +134,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   }
 
-  function getConfigValue(obj, path) {
-    return path.split('.').reduce((o, p) => o?.[p], obj);
-  }
+  window.getConfigValue = function(obj, path) {
+  return path.split('.').reduce((o, p) => o?.[p], obj);
+};
 });

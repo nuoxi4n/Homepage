@@ -131,32 +131,51 @@ function getCookie(name) {
 // 主题切换功能（等待配置加载完成）
 window.addEventListener('configLoaded', function() {
   const themeSwitch = document.getElementById('myonoffswitch');
-  const html = document.querySelector('html');
+  const html = document.documentElement;
   let themeState = getCookie("themeState") || "Light";
+  
+  // 初始化主题状态
+  html.setAttribute('data-theme', themeState);
+  if (themeSwitch) themeSwitch.checked = themeState === "Light";
+  
+  // 确保开关元素存在后再绑定事件
+  if (themeSwitch) {
+    themeSwitch.addEventListener('change', function() {
+      themeState = themeState === "Light" ? "Dark" : "Light";
+      setCookie("themeState", themeState, 365);
+      html.setAttribute('data-theme', themeState);
+      updateTheme(themeState);
+    });
+  }
+  
+  // 更新主题函数
+  function updateTheme(theme) {
+    const snakeImg = document.getElementById('github-snake');
+    if (snakeImg) {
+      try {
+        const lightSrc = window.getConfigValue(window.currentConfig, snakeImg.dataset.configSrcLight);
+        const darkSrc = window.getConfigValue(window.currentConfig, snakeImg.dataset.configSrcDark);
+        
+        // 添加平滑过渡
+        snakeImg.style.opacity = 0;
+        setTimeout(() => {
+          snakeImg.src = theme === "Light" ? lightSrc : darkSrc;
+          snakeImg.style.opacity = 1;
+        }, 150);
+
+        // 预加载图片
+        new Image().src = theme === "Light" ? darkSrc : lightSrc;
+      } catch (error) {
+        console.error('主题切换错误:', error);
+      }
+    }
+  }
+
+  // 初始执行
+  updateTheme(themeState);
 
   if (window.debugConfig?.showFPS) {
     initFPS();
-  }
-
-  function updateTheme(theme) {
-    themeState = theme;
-    html.dataset.theme = theme;
-    setCookie("themeState", theme, 365);
-    themeSwitch.checked = theme === 'Light';
-
-    // 强制重绘保证动画触发
-    document.querySelectorAll('.theme-svg').forEach(svg => {
-      svg.offsetWidth;
-    });
-  }
-
-  if (themeSwitch) {
-    themeSwitch.addEventListener('change', () => {
-      updateTheme(themeState === 'Dark' ? 'Light' : 'Dark');
-    });
-
-    // 初始化主题状态
-    updateTheme(themeState === 'Dark' ? 'Dark' : 'Light');
   }
 });
 
