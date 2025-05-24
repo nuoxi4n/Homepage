@@ -7,19 +7,21 @@
   <link rel="icon" href="./static/img/favicon.ico">
   <meta name="description" content="诺仙仙君 - Live for my faith.">
   <meta name="keywords" content="nuoxian,诺仙仙君,个人主页,主页,home,index,homepage,page">
-  <meta name="viewport" 
-        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <!-- require APlayer -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script>
+  <!-- require MetingJS -->
+  <script src="https://cdn.jsdelivr.net/npm/meting@2/dist/Meting.min.js"></script>
+  <!-- 脚本加载 -->
+  <script src="./customScripts.js"></script>
   
   <!-- 本地样式 -->
   <link rel="stylesheet" href="./static/css/style.css">
   <link rel="stylesheet" href="./static/css/root.css">
   
   <!-- Font Awesome -->
-  <link rel="stylesheet" 
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" 
-        integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" 
-        crossorigin="anonymous" 
-        referrerpolicy="no-referrer">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer">
 </head>
 
 <body>
@@ -60,8 +62,7 @@
     <div class="right">
       <header>
         <div class="index-logo" data-config-style="background-image:profile.logo">
-          <img data-config-src="profile.logokuang" 
-               style="position: absolute; top: -15%; left: -10%; width: 120%; aspect-ratio: 1/1;">
+          <img data-config-src="profile.logokuang" style="position: absolute; top: -15%; left: -10%; width: 120%; aspect-ratio: 1/1;">
         </div>
 
         <div class="welcome" data-config-html="profile.name"></div>
@@ -70,10 +71,7 @@
         <div class="iconContainer" data-config-array="social"></div>
 
         <div class="Github-Active">
-            <img id="github-snake" 
-                data-config-src-light="github-contribution-grid-snake.light" 
-                data-config-src-dark="github-contribution-grid-snake.dark" 
-                alt="Github活动贡献图">
+            <img id="github-snake" data-config-src-light="github-contribution-grid-snake.light" data-config-src-dark="github-contribution-grid-snake.dark" alt="Github活动贡献图">
         </div>
       </header>
 
@@ -101,8 +99,16 @@
     </div>
   </div>
 
+  <!-- 音乐播放器 -->
+  <meting-js
+    server="tencent"
+    type="playlist"
+    id="1449864028"
+    fixed=true
+    mini=true>
+  </meting-js>
+
   <!-- 脚本加载 -->
-  <script src="./customScripts.js"></script>
   <script src="./config-loader.js"></script>
   <script src="./static/js/script.js"></script>
 </body>
