@@ -1,0 +1,54 @@
+:root {
+  --accent-gradient: linear-gradient( 120deg, rgb(133 62 255), #f76cc6 30%, rgb(255, 255, 255) 60% );
+}
+
+html {
+  margin: auto;
+  padding: 1.5rem;
+  max-width: 94ch;
+  font-family:system-ui, sans-serif;
+  background-color:#000;
+  color:#fff;
+  display: block;
+}
+
+.name {
+  font-size: 3rem;
+  font-weight: 800;
+  margin: 0;
+}
+
+.text-gradient {
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-size: 200%;
+  background-position: 0%;
+  animation: backgroundSizeAnimation 10s ease-in-out infinite;
+  background-image: var(--accent-gradient);
+}
+
+@keyframes backgroundSizeAnimation {
+  0%   { background-position: 100%; }
+  25%  { background-position: 50%; }
+  50%  { background-position: 0%; }
+  75%  { background-position: 50%; }
+  100% { background-position: 100%; }
+}
+
+.instructions {
+  line-height: 1.6;
+  margin: 1rem 0;
+  border-radius: .6rem;
+}
+
+.font-normal {
+  font-weight: 400;
+}
+
+.text-current {
+  color:currentColor
+}
+
+.decoration-none {
+  text-decoration:none
+}

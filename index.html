@@ -3,11 +3,12 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>诺仙仙君 - Live for my faith.</title>
+  <title>Hi, I'm nuoxian</title>
   <link rel="icon" href="./static/img/favicon.ico">
-  <meta name="description" content="诺仙仙君 - Live for my faith.">
+  <meta name="description" content="nuoxian's HomePages.">
   <meta name="keywords" content="nuoxian,诺仙仙君,个人主页,主页,home,index,homepage,page">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <meta name="viewport"
+    content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
   <!-- require APlayer -->
   <link rel="stylesheet" href="https://cdnjs.loli.net/ajax/libs/aplayer/1.10.1/APlayer.min.css">
   <script src="https://cdnjs.loli.net/ajax/libs/aplayer/1.10.1/APlayer.min.js"></script>
@@ -15,98 +16,51 @@
   <script src="https://cdnjs.loli.net/ajax/libs/meting/2.0.1/Meting.min.js"></script>
   <!-- 脚本加载 -->
   <script src="./customScripts.js"></script>
-  
+
+  <link href="https://fonts.googleapis.com/css?family=Nunito:400,700,800&display=swap" rel="stylesheet" type="text/css">
+
   <!-- 本地样式 -->
-  <link rel="stylesheet" href="./static/css/style.css">
-  <link rel="stylesheet" href="./static/css/root.css">
-  
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="https://cdnjs.loli.net/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+
+  <!-- iconify -->
+  <script src="https://cdnjs.loli.net/ajax/libs/iconify/3.1.1/iconify.min.js"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
 <body>
-  <!-- 加载动画 -->
-  <div id="loading">
-    <div id="loading-center"></div>
-  </div>
+  <!-- 名称 -->
+  <h1 class="name" data-config-name="profile.name"></h1>
+  <!-- 描述 -->
+  <p class="instructions" data-config-html="profile.description"></p>
+  <!-- 社交按钮  -->
+  <div class="text-current" data-config-array="social"></div>
+  
+  <!-- Github贡献图  -->
+  <img id="github-snake" data-config-src="github-snake" alt="Github活动贡献图">
 
-  <!-- 背景滤镜 -->
-  <div class="filter"></div>
+  <!-- 项目标题 -->
+  <h3 class="flex items-center mt-8 mb-4 font-semibold text-2xl">
+    <span class="flex-1">💻Projects</span>
+    <a href="https://github.com/nuoxi4n" target="_blank" class="opacity-50 hover:opacity-100 ml-2 transition-opacity cursor-pointer">
+      <span class="iconify" data-icon="ri:arrow-right-up-line"></span>
+    </a>
+  </h3>
 
-  <!-- 主内容 -->
-  <div class="main">
-    <!-- 左侧栏 -->
-    <div class="left">
-      <div class="logo" data-config-style="background-image:profile.logo">
-        <img data-config-src="profile.logokuang" 
-             style="position: absolute; top: -15%; left: -10%; width: 120%; aspect-ratio: 1/1;">
-      </div>
+  <!-- 项目列表 -->
+  <div class="grid gap-4 grid-cols-1 sm:grid-cols-2" data-config-array="projects"></div>
 
-      <div class="left-div left-des">
-        <div class="left-des-item" data-config-html="profile.location">
-          <i class="fa-solid fa-location-dot fa-xs"></i>
-        </div>
-        <div class="left-des-item" data-config-html="profile.career">
-          <i class="fa-solid fa-suitcase fa-xs"></i>
-        </div>
-      </div>
+  <!-- 技能标题 -->
+  <h3 class="flex items-center mt-8 mb-4 font-semibold text-2xl">
+    <span class="flex-1">⚡Skills</span>
+  </h3>
 
-      <div class="left-div left-tag" data-config-array="profile.tags"></div>
+  <!-- 技能列表 -->
+  <img id="skill" data-config-src="skill" alt="技能图">
 
-      <div class="left-div left-time">
-        <ul id="line" data-config-array="timeline"></ul>
-      </div>
-    </div>
-
-    <!-- 右侧内容 -->
-    <div class="right">
-      <header>
-        <div class="index-logo" data-config-style="background-image:profile.logo">
-          <img data-config-src="profile.logokuang" style="position: absolute; top: -15%; left: -10%; width: 120%; aspect-ratio: 1/1;">
-        </div>
-
-        <div class="welcome" data-config-html="profile.name"></div>
-        <div class="description" data-config-html="profile.description"></div>
-
-        <div class="iconContainer" data-config-array="social"></div>
-
-        <div class="Github-Active">
-            <img id="github-snake" data-config-src-light="github-contribution-grid-snake.light" data-config-src-dark="github-contribution-grid-snake.dark" alt="Github活动贡献图">
-        </div>
-      </header>
-
-      <content>
-        <div class="title" data-config-html="projects_name"></div>
-        <div class="projectList" data-config-array="projects"></div>
-
-        <div class="title" data-config-html="skill_name"></div>
-        
-        <div class="skill">
-          <img id="skillPc" data-config-src="skill.skillPC">
-          <img id="skillWap" data-config-src="skill.SkillWap">
-        </div>
-      </content>
-    </div>
-  </div>
-
-  <!-- 页脚 -->
-  <footer data-config-html="footer"></footer>
-
-  <!-- 图片弹窗 -->
-  <div class="imgbox">
-    <div class="imgbox-main">
-      <img class="imgbox-img" src="" alt="">
-    </div>
-  </div>
+  <footer class="mt-12 text-sm opacity-40"></footer>
 
   <!-- 音乐播放器 -->
-  <meting-js
-    server="tencent"
-    type="playlist"
-    id="1449864028"
-    fixed=true
-    mini=true>
-  </meting-js>
+  <meting-js server="tencent" type="playlist" id="1449864028" fixed=true mini=true></meting-js>
 
   <!-- 脚本加载 -->
   <script src="./config-loader.js"></script>

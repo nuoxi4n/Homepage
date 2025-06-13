@@ -5,6 +5,8 @@ document.addEventListener('DOMContentLoaded', function() {
       // 全局存储配置
       window.currentConfig = config;
 
+      // 处理名称内容
+      processNameElements(config);
       // 处理文本内容
       processTextElements(config);
       // 处理HTML内容
@@ -22,6 +24,13 @@ document.addEventListener('DOMContentLoaded', function() {
       window.dispatchEvent(new CustomEvent('configLoaded'));
     })
     .catch(error => console.error('Config Error: ', error));
+
+  function processNameElements(config) {
+    document.querySelectorAll('[data-config-name]').forEach(el => {
+      const value = getConfigValue(config, el.dataset.configName);
+      if (value) el.innerHTML = "Hello, I'm <span class=\"text-gradient\">" + value + "</span>";
+    });
+  }
 
   function processTextElements(config) {
     document.querySelectorAll('[data-config-text]').forEach(el => {
@@ -42,51 +51,37 @@ document.addEventListener('DOMContentLoaded', function() {
       const dataPath = container.dataset.configArray;
       const items = getConfigValue(config, dataPath) || [];
 
-      if (dataPath === 'profile.tags') {
-        container.innerHTML = items.map(tag => 
-          `<div class="left-tag-item">${tag}</div>`
-        ).join('');
-      }
-      else if (dataPath === 'timeline') {
-        container.innerHTML = items.map(item => `
-          <li>
-            <div class="focus"></div>
-            <div>${item.event}</div>
-            <div>${item.date}</div>
-          </li>
-        `).join('');
-      }
-      else if (dataPath === 'social') {
-        container.innerHTML = items.map(item => `
-          <a class="iconItem" 
-            ${item.url ? `href="${item.url}"` : 'href="javascript:void(0)"'}
-            ${item.onclick ? `onclick="${item.onclick}"` : ''}>
-            <i class="${item.icon}"></i>
-            <div class="iconTip">${item.name}</div>
-          </a>
-        `).join('') + `
-          <a class="switch" href="javascript:void(0)">
-            <div class="onoffswitch">
-              <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch">
-              <label class="onoffswitch-label" for="myonoffswitch">
-                <span class="onoffswitch-inner"></span>
-                <span class="onoffswitch-switch"></span>
-              </label>
+      // 处理社交按钮数据
+      if (dataPath === 'social') {
+        container.classList.add('flex', 'flex-wrap');
+        container.innerHTML = items.map(social => `
+          <a class="inline-flex text-current px-3 py-2 mt-2 mr-2 rounded-md transition-colors decoration-none bg-gray-500/20 hover:${social.hover_bg} hover:text-white" href="${social.url}" target="_blank">
+            <div class="text-lg">
+              <span class="iconify" data-icon="${social.iconify}"></span>
             </div>
+            ${social.hidden ? '' : `
+              <div class="text-sm ml-1 font-medium">${social.name}</div>
+            `}
           </a>
-        `;
+        `).join('');
       }
       // 处理项目数据
       else if (dataPath === 'projects') {
         const allProjects = Object.values(config.projects).flat();
         container.innerHTML = allProjects.map(project => `
-          <a class="projectItem b" target="_blank" href="${project.url}">
-            <div class="projectItemLeft">
-              <h1>${project.title}</h1>
-              <p>${project.description}</p>
-            </div>
-            <div class="projectItemRight">
-              <img src="${project.image}" alt="${project.title}">
+          <a class="px-4 py-3 text-current rounded-md transition-colors decoration-none bg-gray-400/10 hover:bg-gray-400/20" href="${project.url}" target="_blank">
+            <div class="flex h-full items-center justify-center">
+              <div class="flex-1 flex-col">
+                <div class="font-medium leading-relaxed flex items-center justify-between">
+                  <span>${project.title}</span>
+                </div>
+                <div class="opacity-50 font-normal text-sm">
+                  ${project.description}
+                </div>
+              </div>
+              <div class="ml-4 text-4xl opacity-80">
+                <span class="iconify" data-icon="${project.iconify}"></span>
+              </div>
             </div>
           </a>
         `).join('');
@@ -105,22 +100,6 @@ document.addEventListener('DOMContentLoaded', function() {
       const value = getConfigValue(config, el.dataset.configSrc);
       if (value) el.src = value;
     });
-
-    document.querySelectorAll('[data-config-src-light],[data-config-src-dark]').forEach(el => {
-  const lightSrc = getConfigValue(config, el.dataset.configSrcLight);
-  const darkSrc = getConfigValue(config, el.dataset.configSrcDark);
-  
-  // 初始化时设置默认主题图片
-  if (document.documentElement.getAttribute('data-theme') === 'Dark') {
-    el.src = darkSrc;
-  } else {
-    el.src = lightSrc;
-  }
-  
-  // 预加载两种主题图片
-  new Image().src = lightSrc;
-  new Image().src = darkSrc;
-});
   }
 
   function processDebugConfig(config) {
