@@ -109,7 +109,7 @@ document.addEventListener('DOMContentLoaded', function() {
   function updateFooter(config) {
     const footer = document.querySelector('footer');
     if (config.footer) {
-      footer.innerHTML = Object.values(config.footer).join('<br>');
+      footer.innerHTML = Object.values(config.footer).join('');
     }
   }
 
