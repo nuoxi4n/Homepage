@@ -5,6 +5,8 @@ document.addEventListener('DOMContentLoaded', function() {
       // 全局存储配置
       window.currentConfig = config;
 
+      // 处理标题内容
+      processTitleElements(config);
       // 处理名称内容
       processNameElements(config);
       // 处理文本内容
@@ -26,6 +28,13 @@ document.addEventListener('DOMContentLoaded', function() {
       window.dispatchEvent(new CustomEvent('configLoaded'));
     })
     .catch(error => console.error('Config Error: ', error));
+
+  function processTitleElements(config) {
+    document.querySelectorAll('[data-config-title]').forEach(el => {
+      const value = getConfigValue(config, el.dataset.configTitle);
+      if (value) el.textContent = "Hi, I'm " + value;
+    });
+  }
 
   function processNameElements(config) {
     document.querySelectorAll('[data-config-name]').forEach(el => {
