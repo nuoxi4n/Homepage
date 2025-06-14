@@ -2,8 +2,9 @@
 
 > 原项目作者[@ZYYO666](https://github.com/ZYYO666)，基本所有功能均由原作者完成，我([@nuoxi4n](https://github.com/nuoxi4n))仅在原版基础上对界面细节进行了二次优化，并规整了代码格式。
 
-- 支持对图标、项目、时间线、标签、描述、左侧信息进行管理。
+- 支持对项目、昵称、介绍、底部Footer进行管理。
 - 支持对社交按钮、Github贪吃蛇活跃图、技术栈进行管理。
+- 支持对音乐播放器、赞助按钮进行管理
 
 最终效果：[https://nuoxiana.cn](https://nuoxiana.cn)
 
