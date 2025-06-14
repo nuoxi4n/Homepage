@@ -11,6 +11,8 @@ document.addEventListener('DOMContentLoaded', function() {
       processTextElements(config);
       // 处理HTML内容
       processHtmlElements(config);
+      // 处理链接内容
+      processHrefElements(config);
       // 处理数组内容
       processArrayElements(config);
       // 处理样式和图片
@@ -43,6 +45,13 @@ document.addEventListener('DOMContentLoaded', function() {
     document.querySelectorAll('[data-config-html]').forEach(el => {
       const value = getConfigValue(config, el.dataset.configHtml);
       if (value) el.innerHTML = value;
+    });
+  }
+
+  function processHrefElements(config) {
+    document.querySelectorAll('[data-config-href]').forEach(el => {
+      const value = getConfigValue(config, el.dataset.configHref);
+      if (value) el.href = value;
     });
   }
 
