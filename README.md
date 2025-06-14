@@ -28,4 +28,4 @@
 - [skill-icons](https://github.com/tandpfun/skill-icons)
 - [AplayerJS](https://aplayer.js.org/)
 - [MetingJS](https://github.com/metowolf/MetingJS)
-- [Generate Snake](https://github.com/L1cardo/L1cardo/blob/main/.github/workflows/Generate%20Snake.yml)
+- [Generate Snake](https://github.com/Platane/snk)
