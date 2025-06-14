@@ -4,7 +4,7 @@
   },
   "profile": {
     "name": "nuoxian",
-    "description": "Hi, Welcome to nuoxian's Github homepage 👋"
+    "description": "Hi, Welcome to nuoxian's HomePage 👋"
   },
   "social": [
     {
@@ -25,7 +25,7 @@
       "name": "QQ",
       "hidden": true,
       "iconify": "ri:qq-fill",
-      "url": "123",
+      "url": "https://wpa.qq.com/wpa_jump_page?v=3&uin=1428309052&site=qq&menu=yes",
       "hover_bg": "bg-[#ff8200]"
     },
     {
@@ -43,46 +43,41 @@
       "hover_bg": "bg-[#00b0ff]"
     },
     {
-      "name": "Email",
+      "name": "Sponsor",
       "hidden": true,
       "iconify": "twemoji:money-bag",
-      "url": "mailto:nuo_xian@qq.com",
+      "url": "https://ko-fi.com/nuoxian",
       "hover_bg": "bg-red-400"
     }
   ],
   "projects-url": "https://github.com/nuoxi4n",
   "projects": [
       {
-        "title": "我的项目",
-        "description": "这里是项目描述..11.这里是项目描述这里",
-        "url": "https://nuoxiana.cn",
+        "title": "HomePages",
+        "description": "这是我的个人主页项目，使用了HTML、CSS和JavaScript构建。",
+        "url": "https://github.com/nuoxi4n/Homepage",
         "iconify": "twemoji:open-file-folder"
       },
       {
-        "title": "我的第二个项目",
-        "description": "这里是第二个项目描述...",
+        "title": "Beautiful-Report-Card",
+        "description": "使用PHP+MYSQL开发的学生电子成绩查询系统，输入学号和身份证号即可查询信息。",
+        "url": "https://github.com/NuoXianTech/Beautiful-Report-Card",
         "iconify": "twemoji:open-file-folder"
       },
       {
-        "title": "我的第二个项目",
-        "description": "这里是第二个项目描述...",
-        "url": "https://nuoxiana.cn",
+        "title": "API_Docs",
+        "description": "这是我的API文档项目，包含了各种API的使用说明和示例。",
+        "url": "https://github.com/nuoxi4n/API_Docs",
         "iconify": "twemoji:open-file-folder"
       },
       {
-        "title": "我的第二个项目",
-        "description": "这里是第二个项目描述...",
-        "url": "https://nuoxiana.cn",
-        "iconify": "twemoji:open-file-folder"
-      },
-      {
-        "title": "我的第二个项目",
-        "description": "这里是第二个项目描述...",
-        "url": "https://nuoxiana.cn",
+        "title": "Wishing-Tianqing",
+        "description": "这是模仿天气之子剧中许愿天晴的网站，使用了PHP和MYSQL构建。",
+        "url": "https://github.com/nuoxi4n/Wishing-Tianqing",
         "iconify": "twemoji:open-file-folder"
       }
   ],
   "skill": "https://skillicons.dev/icons?perline=15&i=ae,apple,au,bootstrap,c,cpp,cloudflare,css,discord,docker,git,github,githubactions,gitlab,gmail,html,idea,ai,java,js,jenkins,jquery,kali,linux,md,mongodb,mysql,nginx,nodejs,npm,nuxtjs,ps,php,pnpm,postgres,powershell,pr,py,redis,sqlite,twitter,ts,ubuntu,unity,unreal,vercel,vite,vscode,windows,wordpress",
   "github-snake": "https://raw.gitmirror.com/nuoxi4n/nuoxi4n/main/assets/github-contribution-grid-snake-dark.svg",
-  "footer": "这是footer的内容"
+  "footer": "<p>© 2020 <a href=\"https://nuoxiana.cn\">nuoxian</a>. All Rights Reserved.</p><p><a href=\"https://beian.miit.gov.cn\" target=\"_blank\">赣ICP备2020011953号-1</a> &amp; <a href=\"https://beian.mps.gov.cn/#/query/webSearch?code=36090202000204\" target=\"_blank\">赣公网安备36090202000204号</a></p>"
 }

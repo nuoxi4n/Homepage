@@ -55,7 +55,7 @@
   <img id="skill" data-config-src="skill" alt="技能图">
 
   <!-- 底部Footer -->
-  <footer class="mt-12 text-sm opacity-40"></footer>
+  <footer class="mt-12 mb-12 text-sm opacity-40"></footer>
 
   <!-- 音乐播放器 -->
   <meting-js server="tencent" type="playlist" id="1449864028" fixed=true mini=true></meting-js>
@@ -63,5 +63,22 @@
   <!-- 脚本加载 -->
   <script src="./config-loader.js"></script>
   <script src="./static/js/script.js"></script>
+  <!-- ko-fi -->
+  <script src='https://storage.ko-fi.com/cdn/scripts/overlay-widget.js'></script>
+  <script>
+    kofiWidgetOverlay.draw('nuoxian', {
+      'type': 'floating-chat',
+      'floating-chat.donateButton.text': 'Support Me',
+      'floating-chat.donateButton.background-color': '#00b9fe',
+      'floating-chat.donateButton.text-color': '#fff'
+    });
+  </script>
+  <style>
+    .floatingchat-container-wrap,
+    .floating-chat-kofi-popup-iframe {
+      right: 16px;
+      left: unset;
+    }
+  </style>
 </body>
 </html>
