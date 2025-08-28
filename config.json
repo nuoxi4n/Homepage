@@ -46,7 +46,7 @@
       "name": "Sponsor",
       "hidden": true,
       "iconify": "twemoji:money-bag",
-      "url": "https://ko-fi.com/nuoxian",
+      "url": "https://afdian.com/a/nuoxian",
       "hover_bg": "bg-red-400"
     }
   ],
@@ -74,6 +74,12 @@
         "title": "Wishing-Tianqing",
         "description": "这是模仿天气之子剧中许愿天晴的网站，使用了PHP和MYSQL构建。",
         "url": "https://github.com/nuoxi4n/Wishing-Tianqing",
+        "iconify": "twemoji:open-file-folder"
+      },
+      {
+        "title": "Uptime_Status",
+        "description": "利用UptimeRobot API展示自己网站服务状态的网站。",
+        "url": "https://github.com/nuoxi4n/Uptime_Status",
         "iconify": "twemoji:open-file-folder"
       }
   ],

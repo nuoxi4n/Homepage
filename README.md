@@ -15,6 +15,16 @@
 - 服务器部署时 **不** 需要任何依赖环境😀。
 - 通过 `config.json` 即可改变主页显示内容。
 
+#### Github Pages
+
+通过Github提供的Github Pages项目即可在线部署一个网站
+
+- 先 Fork 本项目
+- 删除 CNAME 文件
+- 在 Settings 找到 Pages
+- 部署一个静态网站
+- 修改 config.json 配置内容
+
 ### 🧠 技术栈
 
 - HTML

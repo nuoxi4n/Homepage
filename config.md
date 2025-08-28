@@ -1,0 +1,22 @@
+## 配置文件注释说明
+
+- debug
+    - showFPS // 是否开启FPS显示
+- profile
+    - name // 个人昵称
+    - description // 个人描述
+- social
+    - name // 按钮文本
+    - hidden // 是否只显示图标
+    - iconify // iconify图标
+    - url // 点击跳转链接
+    - hover_bg // 背景颜色，可使用渐变等
+- projects-url // 项目右边图标跳转链接
+- projects
+    - title // 项目名称
+    - description // 项目描述
+    - url // 项目链接
+    - iconify // 项目图标
+- skill // 技能展示
+- github-snake // 贪吃蛇贡献图
+- footer // 底部版权标签
