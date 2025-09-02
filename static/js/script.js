@@ -61,7 +61,7 @@ function initFPS() {
 
 // 主题切换功能（等待配置加载完成）
 window.addEventListener('configLoaded', function() {
-  if (window.debugConfig?.showFPS) {
+  if (window.debugConfig?.showFps) {
     initFPS();
   }
 });

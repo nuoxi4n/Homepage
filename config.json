@@ -1,6 +1,6 @@
 {
   "debug": {
-    "showFPS": true
+    "showFps": true
   },
   "profile": {
     "name": "nuoxian",
@@ -12,35 +12,35 @@
       "hidden": false,
       "iconify": "ri:github-fill",
       "url": "https://github.com/nuoxi4n",
-      "hover_bg": "bg-gray-700"
+      "hoverBg": "bg-gray-700"
     },
     {
       "name": "Blog",
       "hidden": false,
       "iconify": "ri:book-2-line",
       "url": "https://nxvav.cn",
-      "hover_bg": "bg-gradient-to-r from-[#fd5949] to-[#d6249f]"
+      "hoverBg": "bg-gradient-to-r from-[#fd5949] to-[#d6249f]"
     },
     {
       "name": "QQ",
       "hidden": true,
       "iconify": "ri:qq-fill",
       "url": "https://wpa.qq.com/wpa_jump_page?v=3&uin=1428309052&site=qq&menu=yes",
-      "hover_bg": "bg-[#ff8200]"
+      "hoverBg": "bg-[#ff8200]"
     },
     {
       "name": "Bilibili",
       "hidden": true,
       "iconify": "ri:bilibili-fill",
       "url": "https://space.bilibili.com/107773081",
-      "hover_bg": "bg-[#fb7299]"
+      "hoverBg": "bg-[#fb7299]"
     },
     {
       "name": "Email",
       "hidden": true,
       "iconify": "ri:mail-fill",
       "url": "mailto:nuo_xian@qq.com",
-      "hover_bg": "bg-[#00b0ff]"
+      "hoverBg": "bg-[#00b0ff]"
     },
     {
       "name": "Sponsor",
@@ -50,7 +50,7 @@
       "hover_bg": "bg-red-400"
     }
   ],
-  "projects-url": "https://github.com/nuoxi4n",
+  "projectsUrl": "https://github.com/nuoxi4n",
   "projects": [
       {
         "title": "HomePages",
@@ -84,6 +84,6 @@
       }
   ],
   "skill": "https://skillicons.dev/icons?perline=15&i=ae,apple,au,bootstrap,c,cpp,cloudflare,css,discord,docker,git,github,githubactions,gitlab,gmail,html,idea,ai,java,js,jenkins,jquery,kali,linux,md,mongodb,mysql,nginx,nodejs,npm,nuxtjs,ps,php,pnpm,postgres,powershell,pr,py,redis,sqlite,twitter,ts,ubuntu,unity,unreal,vercel,vite,vscode,windows,wordpress",
-  "github-snake": "https://raw.gitmirror.com/nuoxi4n/nuoxi4n/main/assets/github-contribution-grid-snake-dark.svg",
+  "githubSnake": "https://raw.gitmirror.com/nuoxi4n/nuoxi4n/main/assets/github-contribution-grid-snake-dark.svg",
   "footer": "<p>© 2020 <a href=\"https://nuoxiana.cn\">nuoxian</a>. All Rights Reserved.</p><p><a href=\"https://beian.miit.gov.cn\" target=\"_blank\">赣ICP备2020011953号-1</a> &amp; <a href=\"https://beian.mps.gov.cn/#/query/webSearch?code=36090202000204\" target=\"_blank\">赣公网安备36090202000204号</a></p>"
 }

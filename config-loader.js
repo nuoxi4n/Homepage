@@ -73,7 +73,7 @@ document.addEventListener('DOMContentLoaded', function() {
       if (dataPath === 'social') {
         container.classList.add('flex', 'flex-wrap');
         container.innerHTML = items.map(social => `
-          <a class="inline-flex text-current px-3 py-2 mt-2 mr-2 rounded-md transition-colors decoration-none bg-gray-500/20 hover:${social.hover_bg} hover:text-white" href="${social.url}" target="_blank">
+          <a class="inline-flex text-current px-3 py-2 mt-2 mr-2 rounded-md transition-colors decoration-none bg-gray-500/20 hover:${social.hoverBg} hover:text-white" href="${social.url}" target="_blank">
             <div class="text-lg">
               <span class="iconify" data-icon="${social.iconify}"></span>
             </div>
