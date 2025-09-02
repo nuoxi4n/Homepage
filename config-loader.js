@@ -132,6 +132,6 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 
   window.getConfigValue = function(obj, path) {
-  return path.split('.').reduce((o, p) => o?.[p], obj);
-};
+    return path.split('.').reduce((o, p) => o?.[p], obj);
+  };
 });
