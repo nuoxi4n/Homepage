@@ -23,8 +23,11 @@
 ```
 
 ## 📁 项目展示 (Projects)
+- **projectsName**  
+  `string` | 项目名称  
+  *示例: "💻Projects"*
 - **projectsUrl**  
-  `string` | 项目跳转总链接  
+  `string` | 项目跳转链接  
   *示例: "https://nuoxiana.cn"*
 ```yaml
 - title:       "项目名称"      # 项目名称
@@ -34,6 +37,9 @@
 ```
 
 ## 🎖️ 技能展示 (skill)
+- **skillName**  
+  `string` | 技能名称  
+  *示例: "⚡Skills"*
 - **skill**  
   `string` | 使用 skillicons.dev 提供的图标生成链接  
   *示例: "https://skillicons.dev/icons?perline=15&i=ae,apple,au"*

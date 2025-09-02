@@ -47,9 +47,10 @@
       "hidden": true,
       "iconify": "twemoji:money-bag",
       "url": "https://afdian.com/a/nuoxian",
-      "hover_bg": "bg-red-400"
+      "hoverBg": "bg-red-400"
     }
   ],
+  "projectsName": "💻Projects",
   "projectsUrl": "https://github.com/nuoxi4n",
   "projects": [
       {
@@ -83,6 +84,7 @@
         "iconify": "twemoji:open-file-folder"
       }
   ],
+  "skillName": "⚡Skills",
   "skill": "https://skillicons.dev/icons?perline=15&i=ae,apple,au,bootstrap,c,cpp,cloudflare,css,discord,docker,git,github,githubactions,gitlab,gmail,html,idea,ai,java,js,jenkins,jquery,kali,linux,md,mongodb,mysql,nginx,nodejs,npm,nuxtjs,ps,php,pnpm,postgres,powershell,pr,py,redis,sqlite,twitter,ts,ubuntu,unity,unreal,vercel,vite,vscode,windows,wordpress",
   "githubSnake": "https://raw.gitmirror.com/nuoxi4n/nuoxi4n/main/assets/github-contribution-grid-snake-dark.svg",
   "footer": "<p>© 2020 <a href=\"https://nuoxiana.cn\">nuoxian</a>. All Rights Reserved.</p><p><a href=\"https://beian.miit.gov.cn\" target=\"_blank\">赣ICP备2020011953号-1</a> &amp; <a href=\"https://beian.mps.gov.cn/#/query/webSearch?code=36090202000204\" target=\"_blank\">赣公网安备36090202000204号</a></p>"
