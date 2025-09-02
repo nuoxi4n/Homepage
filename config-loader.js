@@ -21,6 +21,8 @@ document.addEventListener('DOMContentLoaded', function() {
       processStyleAttributes(config);
       // 处理页脚
       updateFooter(config);
+      // 处理音乐播放器
+      processMusicPlayer(config);
       // 处理DeBug
       processDebugConfig(config);
 
@@ -122,6 +124,56 @@ document.addEventListener('DOMContentLoaded', function() {
 
   function processDebugConfig(config) {
     window.debugConfig = config.debug || {};
+  }
+
+  function processMusicPlayer(config) {
+    document.querySelectorAll('[data-config-music]').forEach(container => {
+      const musicConfig = getConfigValue(config, 'musicPlayer');
+
+      if (!musicConfig || !musicConfig.enabled) {
+        container.innerHTML = '';
+        return;
+      }
+
+      container.innerHTML = '';
+      const metingEl = document.createElement('meting-js');
+      metingEl.setAttribute('server', musicConfig.server || '');
+      metingEl.setAttribute('type', musicConfig.type || '');
+      metingEl.setAttribute('id', musicConfig.id || '');
+      metingEl.setAttribute('fixed', musicConfig.fixed ? 'true' : 'false');
+      metingEl.setAttribute('mini', musicConfig.mini ? 'true' : 'false');
+      metingEl.setAttribute('autoplay', musicConfig.autoplay ? 'true' : 'false');
+      metingEl.setAttribute('theme', musicConfig.theme || '');
+      const allowedLoopModes = ['all', 'one', 'none'];
+      const loopValue = musicConfig.loop && allowedLoopModes.includes(musicConfig.loop)
+      ? musicConfig.loop
+      : 'all';
+      metingEl.setAttribute('loop', loopValue);
+      const allowedOrderModes = ['list', 'random'];
+      const orderValue = musicConfig.order && allowedOrderModes.includes(musicConfig.order)
+      ? musicConfig.order
+      : 'list';
+      metingEl.setAttribute('order', orderValue);
+      const allowedPreloadModes = ['none', 'metadata', 'auto'];
+      const preloadValue = musicConfig.preload && allowedPreloadModes.includes(musicConfig.preload)
+      ? musicConfig.preload
+      : 'auto';
+      metingEl.setAttribute('preload', preloadValue);
+      const allowedVolumeModes = [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0];
+      const volumeValue = musicConfig.volume && allowedVolumeModes.includes(musicConfig.volume)
+      ? musicConfig.volume
+      : 0.7;
+      metingEl.setAttribute('volume', volumeValue);
+      metingEl.setAttribute('mutex', musicConfig.mutex ? 'true' : 'false');
+      if (!musicConfig || !musicConfig.lrcEnabled) {
+        metingEl.setAttribute('lrc-type', 0);
+      }
+      metingEl.setAttribute('list-folded', musicConfig.listFolded ? 'true' : 'false');
+      metingEl.setAttribute('list-max-height', musicConfig.listMaxHeight || '340px');
+      metingEl.setAttribute('storage-name', musicConfig.storageName || 'metingjs');
+
+      container.appendChild(metingEl);
+    });
   }
 
   function updateFooter(config) {

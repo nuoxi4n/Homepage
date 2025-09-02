@@ -35,6 +35,8 @@ html {
   100% { background-position: 100%; }
 }
 
+/* TailwindCSS样式 */
+
 .instructions {
   line-height: 1.6;
   margin: 1rem 0;
@@ -51,4 +53,14 @@ html {
 
 .decoration-none {
   text-decoration:none
+}
+
+/* 音乐播放器样式 */
+
+.aplayer .aplayer-title {
+  color:#000;
+}
+
+.aplayer .aplayer-list-title {
+  color: #000;
 }

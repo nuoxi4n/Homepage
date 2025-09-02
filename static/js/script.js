@@ -1,5 +1,5 @@
 console.log(
-  "\n %c zyyo.net & nuoxian %c www.nuoxiana.cn",
+  "\n %c zyyo.net & nuoxian %c https://nuoxiana.cn",
   "color:#777777;background:linear-gradient(to right,#ebf2ed,#e5ebee,#f0e5c7,#f8eef0);padding:5px 0;",
   "color:#fff;background:#f8f8f8;padding:5px 10px 5px 0px;"
 );

@@ -6,6 +6,25 @@
     "name": "nuoxian",
     "description": "Hi, Welcome to nuoxian's HomePage 👋"
   },
+  "musicPlayer": {
+    "enabled": true,
+    "server": "tencent",
+    "type": "playlist",
+    "id": "1449864028",
+    "fixed": true,
+    "mini": true,
+    "autoplay": false,
+    "theme": "#2980b9",
+    "loop": "all",
+    "order": "list",
+    "preload": "auto",
+    "volume": 0.7,
+    "mutex": true,
+    "lrcEnabled": false,
+    "listFolded": false,
+    "listMaxHeight": "340px",
+    "storageName": "metingjs"
+  },
   "social": [
     {
       "name": "GitHub",
