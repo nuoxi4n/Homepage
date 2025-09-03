@@ -1,6 +1,6 @@
 {
   "debug": {
-    "showFps": true,
+    "showFps": false,
     "menuExt": false
   },
   "profile": {
@@ -12,7 +12,7 @@
     "enabled": true,
     "server": "tencent",
     "type": "playlist",
-    "id": "1449864028",
+    "id": "9571756360",
     "fixed": true,
     "mini": true,
     "autoplay": false,
@@ -43,6 +43,13 @@
       "hoverBg": "bg-gradient-to-r from-[#fd5949] to-[#d6249f]"
     },
     {
+      "name": "API服务",
+      "hidden": false,
+      "iconify": "ri:code-s-slash-fill",
+      "url": "https://api.nxvav.cn",
+      "hoverBg": "bg-gray-700"
+    },
+    {
       "name": "QQ",
       "hidden": true,
       "iconify": "ri:qq-fill",
@@ -66,7 +73,7 @@
     {
       "name": "Sponsor",
       "hidden": true,
-      "iconify": "twemoji:money-bag",
+      "iconify": "ri:money-cny-circle-fill",
       "url": "https://afdian.com/a/nuoxian",
       "hoverBg": "bg-red-400"
     }
@@ -78,13 +85,13 @@
         "title": "HomePages",
         "description": "这是我的个人主页项目，使用了HTML、CSS和JavaScript构建。",
         "url": "https://github.com/nuoxi4n/Homepage",
-        "iconify": "twemoji:open-file-folder"
+        "iconify": "flat-color-icons:home"
       },
       {
         "title": "Beautiful-Report-Card",
         "description": "使用PHP+MYSQL开发的学生电子成绩查询系统，输入学号和身份证号即可查询信息。",
         "url": "https://github.com/NuoXianTech/Beautiful-Report-Card",
-        "iconify": "twemoji:open-file-folder"
+        "iconify": "streamline-plump-color:file-report-flat"
       },
       {
         "title": "API_Docs",
@@ -96,17 +103,17 @@
         "title": "Wishing-Tianqing",
         "description": "这是模仿天气之子剧中许愿天晴的网站，使用了PHP和MYSQL构建。",
         "url": "https://github.com/nuoxi4n/Wishing-Tianqing",
-        "iconify": "twemoji:open-file-folder"
+        "iconify": "streamline-stickies-color:sun-clound-weather"
       },
       {
         "title": "Uptime_Status",
         "description": "利用UptimeRobot API展示自己网站服务状态的网站。",
         "url": "https://github.com/nuoxi4n/Uptime_Status",
-        "iconify": "twemoji:open-file-folder"
+        "iconify": "arcticons:uptimerobot"
       }
   ],
   "skillName": "⚡Skills",
-  "skill": "https://skillicons.dev/icons?perline=15&i=ae,apple,au,bootstrap,c,cpp,cloudflare,css,discord,docker,git,github,githubactions,gitlab,gmail,html,idea,ai,java,js,jenkins,jquery,kali,linux,md,mongodb,mysql,nginx,nodejs,npm,nuxtjs,ps,php,pnpm,postgres,powershell,pr,py,redis,sqlite,twitter,ts,ubuntu,unity,unreal,vercel,vite,vscode,windows,wordpress",
+  "skill": "https://skillicons.dev/icons?perline=15&i=apple,bootstrap,cloudflare,css,discord,docker,git,github,gmail,gradle,html,idea,java,js,jquery,kali,linux,md,mysql,nginx,nodejs,ps,php,powershell,pr,py,sqlite,twitter,unreal,vercel,vite,vscode,vue,windows,wordpress",
   "githubSnake": "https://raw.gitmirror.com/nuoxi4n/nuoxi4n/main/assets/github-contribution-grid-snake-dark.svg",
   "footer": "<p>© 2020 <a href=\"https://nuoxiana.cn\">nuoxian</a>. All Rights Reserved.</p><p><a href=\"https://beian.miit.gov.cn\" target=\"_blank\">赣ICP备2020011953号-1</a> &amp; <a href=\"https://beian.mps.gov.cn/#/query/webSearch?code=36090202000204\" target=\"_blank\">赣公网安备36090202000204号</a></p>"
 }
