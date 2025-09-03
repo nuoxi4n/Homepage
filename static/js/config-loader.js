@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', function() {
-  fetch('./config.json')
+  fetch('config.json')
     .then(response => response.json())
     .then(config => {
       // 全局存储配置
