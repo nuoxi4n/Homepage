@@ -4,7 +4,8 @@
     "menuExt": false
   },
   "profile": {
-    "name": "nuoxian",
+    "name": "Hello, I'm <span class=\"text-gradient\">nuoxian</span>",
+    "title": "Hi, I'm nuoxian",
     "description": "Hi, Welcome to nuoxian's HomePage 👋"
   },
   "musicPlayer": {

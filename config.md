@@ -63,11 +63,14 @@
 
 ## 👤 个人资料 (Profile)
 - **name**  
-  `string` | 个人昵称/用户名  
-  *示例: "技术探险家"*
+  `string` | 个人昵称/用户名，支持html代码  
+  *示例: "```Hello, I'm <span class=\"text-gradient\">nuoxian</span>```"*
+- **title**  
+  `string` | 网站标题  
+  *示例: "Hi, I'm nuoxian"*
 - **description**  
   `string` | 个人简介描述  
-  *示例: "全栈开发者 | AI爱好者"*
+  *示例: "Hi, Welcome to nuoxian's HomePage 👋"*
 
 ## 🌐 社交链接 (Social)
 ```yaml
