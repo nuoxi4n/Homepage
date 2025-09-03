@@ -4,6 +4,9 @@
 - **showFPS**  
   `boolean` | 是否开启屏幕帧率(FPS)显示  
   *示例: `true` 或 `false`*
+- **menuExt**  
+  `boolean` | 是否禁止右键菜单  
+  *示例: `true` 或 `false`*
 
 ## 🎵 音乐设置 (musicPlayer)
 - **enabled**  

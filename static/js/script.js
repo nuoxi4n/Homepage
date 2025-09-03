@@ -4,11 +4,7 @@ console.log(
   "color:#fff;background:#f8f8f8;padding:5px 10px 5px 0px;"
 );
 
-// 是否禁止右键菜单
-//document.addEventListener('contextmenu', function(event) {
-//  event.preventDefault();
-//});
-
+// 显示FPS
 function initFPS() {
   var fpsElement = document.createElement('div');
   fpsElement.id = 'fps';
@@ -59,9 +55,19 @@ function initFPS() {
   }
 }
 
+// 禁止右键菜单
+function MenuExt() {
+  document.addEventListener('contextmenu', function(event) {
+    event.preventDefault();
+  });
+}
+
 // 主题切换功能（等待配置加载完成）
 window.addEventListener('configLoaded', function() {
   if (window.debugConfig?.showFps) {
     initFPS();
+  }
+  if (window.debugConfig?.menuExt) {
+    MenuExt();
   }
 });

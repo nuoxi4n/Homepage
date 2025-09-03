@@ -1,6 +1,7 @@
 {
   "debug": {
-    "showFps": true
+    "showFps": true,
+    "menuExt": false
   },
   "profile": {
     "name": "nuoxian",
