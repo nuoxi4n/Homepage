@@ -6,42 +6,55 @@ console.log(
 
 // 显示FPS
 function initFPS() {
-  var fpsElement = document.createElement('div');
+  const fpsElement = document.createElement('div');
   fpsElement.id = 'fps';
-  fpsElement.style.cssText = `
-    z-index: 10000;
-    position: fixed;
-    top: 10px;
-    left: 10px;
-    font-family: monospace;
-    background: rgba(0,0,0,0.7);
-    color: #00ff00;
-    padding: 5px 10px;
-    border-radius: 5px;
-    text-shadow: 0 0 2px #000;
+  
+  fpsElement.className = `
+    z-50 fixed top-2 left-2
+    font-mono text-xs sm:text-sm
+    bg-black bg-opacity-70 text-green-400
+    px-2 py-1 rounded
+    shadow-md
+    transition-opacity duration-300
+    hover:opacity-100
   `;
   
-  document.body.insertBefore(fpsElement, document.body.firstChild);
+  // 初始设置为半透明，减少干扰
+  fpsElement.style.opacity = '0.7';
+  
+  document.body.appendChild(fpsElement);
 
-  var requestAnimationFrame = window.requestAnimationFrame || 
+  const requestAnimationFrame = window.requestAnimationFrame || 
                              window.webkitRequestAnimationFrame || 
                              window.mozRequestAnimationFrame || 
                              window.oRequestAnimationFrame || 
                              window.msRequestAnimationFrame;
 
-  var fps = 0, 
+  let fps = 0, 
       last = Date.now(), 
       frameCount = 0;
 
   function update() {
     frameCount++;
-    var now = Date.now();
-    var delta = now - last;
+    const now = Date.now();
+    const delta = now - last;
 
     if (delta >= 1000) {
       fps = Math.round((frameCount * 1000) / delta);
       frameCount = 0;
       last = now;
+      
+      // 根据FPS值改变文字颜色
+      if (fps < 20) {
+        fpsElement.classList.remove('text-green-400', 'text-yellow-400');
+        fpsElement.classList.add('text-red-400');
+      } else if (fps < 45) {
+        fpsElement.classList.remove('text-green-400', 'text-red-400');
+        fpsElement.classList.add('text-yellow-400');
+      } else {
+        fpsElement.classList.remove('text-yellow-400', 'text-red-400');
+        fpsElement.classList.add('text-green-400');
+      }
     }
 
     fpsElement.textContent = `FPS: ${fps}`;
@@ -53,6 +66,20 @@ function initFPS() {
   } else {
     console.warn('requestAnimationFrame 不支持');
   }
+  
+  // 添加自动隐藏功能（5秒无交互后）
+  let hideTimeout;
+  const resetHideTimeout = () => {
+    clearTimeout(hideTimeout);
+    fpsElement.style.opacity = '0.7';
+    hideTimeout = setTimeout(() => {
+      fpsElement.style.opacity = '0.3';
+    }, 5000);
+  };
+  
+  resetHideTimeout();
+  document.addEventListener('mousemove', resetHideTimeout);
+  document.addEventListener('touchstart', resetHideTimeout);
 }
 
 // 禁止右键菜单
@@ -62,7 +89,7 @@ function MenuExt() {
   });
 }
 
-// 主题切换功能（等待配置加载完成）
+// 等待配置加载完成
 window.addEventListener('configLoaded', function() {
   if (window.debugConfig?.showFps) {
     initFPS();
