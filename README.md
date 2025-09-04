@@ -35,6 +35,10 @@
 - CSS
 - JavaScript
 
+### 📃 License
+
+This project is under [MIT](LICENSE) license.
+
 ### 🙏 Ref
 
 - [TailwindCSS](https://v3.tailwindcss.com/)
