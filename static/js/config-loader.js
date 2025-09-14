@@ -6,7 +6,8 @@ document.addEventListener('DOMContentLoaded', function() {
     array: '[data-config-array]',
     style: '[data-config-style]',
     src: '[data-config-src]',
-    music: '[data-config-music]'
+    music: '[data-config-music]',
+    video: '[data-config-video]'
   };
 
   fetch('config.json')
@@ -25,6 +26,56 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
   function applyConfig(config) {
+    // 特殊日期功能
+    const specialDatesEnabled = config.enableSpecialDates !== false;
+    if (specialDatesEnabled) {
+      // 日期检测逻辑
+      const today = new Date();
+      const month = today.getMonth() + 1;
+      const date = today.getDate();
+      const year = today.getFullYear();
+      
+      // 检查所有特殊日期
+      if (config.specialDates && Array.isArray(config.specialDates)) {
+        config.specialDates.forEach(specialDate => {
+          // 检查日期范围
+          let isInRange = false;
+          
+          // 单日节日
+          if (specialDate.day && !specialDate.startDate) {
+            if (specialDate.month === month && specialDate.day === date) {
+              isInRange = true;
+            }
+          }
+          // 多日节日（使用日期范围）
+          else if (specialDate.startDate && specialDate.endDate) {
+            // 处理不带年份的日期格式（如"10-1"）
+            const startDateParts = specialDate.startDate.split('-');
+            const endDateParts = specialDate.endDate.split('-');
+            
+            // 确保日期格式正确
+            if (startDateParts.length === 2 && endDateParts.length === 2) {
+              // 创建当前年份的日期对象
+              const startDate = new Date(year, parseInt(startDateParts[0]) - 1, parseInt(startDateParts[1]));
+              const endDate = new Date(year, parseInt(endDateParts[0]) - 1, parseInt(endDateParts[1]));
+              
+              // 包含结束日期
+              endDate.setDate(endDate.getDate() + 1);
+              
+              if (today >= startDate && today < endDate) {
+                isInRange = true;
+              }
+            }
+          }
+          
+          if (isInRange) {
+            // 应用节日描述
+            config.profile.description = specialDate.description;
+          }
+        });
+      }
+    }
+
     // 处理文本内容
     processSimpleElements(config, CONFIG_SELECTORS.text, el => {
       const value = getConfigValue(config, el.dataset.configText);
@@ -50,8 +101,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
       if (dataPath === 'social') {
         renderSocialItems(el, items);
-      } else if (dataPath === 'projects') {
-        renderProjects(el, Object.values(config.projects).flat());
+      } else if (dataPath === 'projectsList') {
+        renderProjects(el, Object.values(config.projectsList).flat());
       }
     });
 
@@ -72,6 +123,18 @@ document.addEventListener('DOMContentLoaded', function() {
     processSimpleElements(config, CONFIG_SELECTORS.music, container => {
       const musicConfig = getConfigValue(config, 'musicPlayer');
       renderMusicPlayer(container, musicConfig);
+    });
+
+    // 处理视频
+    processSimpleElements(config, CONFIG_SELECTORS.video, el => {
+      const videoConfig = getConfigValue(config, el.dataset.configVideo);
+      if (videoConfig) {
+        const videoEl = document.createElement('video');
+        videoEl.src = videoConfig.src;
+        videoEl.controls = true;
+        el.innerHTML = '';
+        el.appendChild(videoEl);
+      }
     });
 
     // 处理页脚和调试配置

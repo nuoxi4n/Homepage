@@ -8,25 +8,54 @@
     "title": "Hi, I'm nuoxian",
     "description": "Hi, Welcome to nuoxian's HomePage 👋"
   },
-  "musicPlayer": {
-    "enabled": true,
-    "server": "tencent",
-    "type": "playlist",
-    "id": "9571756360",
-    "fixed": true,
-    "mini": true,
-    "autoplay": false,
-    "theme": "#2980b9",
-    "loop": "all",
-    "order": "list",
-    "preload": "auto",
-    "volume": 0.7,
-    "mutex": true,
-    "lrcEnabled": false,
-    "listFolded": false,
-    "listMaxHeight": "340px",
-    "storageName": "metingjs"
-  },
+  "enableSpecialDates": true,
+  "specialDates": [
+    {
+      "month": 1,
+      "day": 1,
+      "description": "🎉 元旦快乐！新的一年，新的开始！"
+    },
+    {
+      "month": 2,
+      "day": 14,
+      "description": "💖 情人节快乐！愿你的生活充满爱与甜蜜！"
+    },
+    {
+      "month": 5,
+      "day": 1,
+      "description": "🌹 劳动节快乐！致敬每一位劳动者！"
+    },
+    {
+      "month": 5,
+      "day": 4,
+      "description": "🎓 五四青年节快乐！青春无悔，奋斗不息！"
+    },
+    {
+      "month": 6,
+      "day": 1,
+      "description": "🧒 儿童节快乐！愿每个孩子都能健康快乐成长！"
+    },
+    {
+      "month": 8,
+      "day": 1,
+      "description": "🎖️ 八一建军节！向中国人民解放军致敬！感谢你们保家卫国、守护和平！"
+    },
+    {
+      "month": 9,
+      "day": 10,
+      "description": "👨‍🏫 教师节快乐！感谢所有辛勤的老师们！"
+    },
+    {
+      "startDate": "10-1",
+      "endDate": "10-7",
+      "description": "🇨🇳 国庆节快乐！祝福祖国繁荣昌盛！"
+    },
+    {
+      "month": 12,
+      "day": 25,
+      "description": "🎄 圣诞快乐！愿你拥有一个美好的假期！"
+    }
+  ],
   "social": [
     {
       "name": "GitHub",
@@ -78,9 +107,10 @@
       "hoverBg": "bg-red-400"
     }
   ],
+  "githubSnake": "https://raw.gitmirror.com/nuoxi4n/nuoxi4n/main/assets/github-contribution-grid-snake-dark.svg",
   "projectsName": "💻Projects",
   "projectsUrl": "https://github.com/nuoxi4n",
-  "projects": [
+  "projectsList": [
       {
         "title": "HomePages",
         "description": "这是我的个人主页项目，使用了HTML、CSS和JavaScript构建。",
@@ -113,7 +143,38 @@
       }
   ],
   "skillName": "⚡Skills",
-  "skill": "https://skillicons.dev/icons?perline=15&i=apple,bootstrap,cloudflare,css,discord,docker,git,github,gmail,gradle,html,idea,java,js,jquery,kali,linux,md,mysql,nginx,nodejs,ps,php,powershell,pr,py,sqlite,twitter,unreal,vercel,vite,vscode,vue,windows,wordpress",
-  "githubSnake": "https://raw.gitmirror.com/nuoxi4n/nuoxi4n/main/assets/github-contribution-grid-snake-dark.svg",
+  "skillUrl": "https://skillicons.dev/icons?perline=15&i=apple,bootstrap,cloudflare,css,discord,docker,git,github,gmail,gradle,html,idea,java,js,jquery,kali,linux,md,mysql,nginx,nodejs,ps,php,powershell,pr,py,sqlite,twitter,unreal,vercel,vite,vscode,vue,windows,wordpress",
+  "musicPlayer": {
+    "enabled": true,
+    "server": "tencent",
+    "type": "playlist",
+    "id": "9571756360",
+    "fixed": true,
+    "mini": true,
+    "autoplay": false,
+    "theme": "#2980b9",
+    "loop": "all",
+    "order": "list",
+    "preload": "auto",
+    "volume": 0.7,
+    "mutex": true,
+    "lrcEnabled": false,
+    "listFolded": false,
+    "listMaxHeight": "340px",
+    "storageName": "metingjs"
+  },
+  "videoBackground": {
+    "enabled": false,
+    "sources": [
+      {
+        "type": "local",
+        "path": "video.mp4",
+        "format": "mp4"
+      }
+    ],
+    "blur": 5,
+    "showLoading": true,
+    "fallbackImage": "assets/images/fallback-bg.jpg"
+  },
   "footer": "<p>© 2020 <a href=\"https://nuoxiana.cn\">nuoxian</a>. All Rights Reserved.</p><p><a href=\"https://beian.miit.gov.cn\" target=\"_blank\">赣ICP备2020011953号-1</a> &amp; <a href=\"https://beian.mps.gov.cn/#/query/webSearch?code=36090202000204\" target=\"_blank\">赣公网安备36090202000204号</a></p>"
 }

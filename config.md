@@ -8,6 +8,58 @@
   `boolean` | 是否禁止右键菜单  
   *示例: `true` 或 `false`*
 
+## 👤 个人资料 (Profile)
+- **name**  
+  `string` | 个人昵称/用户名，支持html代码  
+  *示例: "```Hello, I'm <span class=\"text-gradient\">nuoxian</span>```"*
+- **title**  
+  `string` | 网站标题  
+  *示例: "Hi, I'm nuoxian"*
+- **description**  
+  `string` | 个人简介描述  
+  *示例: "Hi, Welcome to nuoxian's HomePage 👋"*
+
+## 🌐 社交链接 (Social)
+```yaml
+- name:        "按钮显示文本"  # 如：GitHub
+  hidden:      true/false     # 是否仅显示图标
+  iconify:     "图标代码"      # Iconify图标库标识符
+  url:         "https://"     # 点击跳转链接
+  hoverBg:     "渐变颜色"      # 悬停背景色，支持CSS渐变、
+```
+
+## 📁 项目展示 (Projects)
+- **projectsName**  
+  `string` | 项目名称  
+  *示例: "💻Projects"*
+- **projectsUrl**  
+  `string` | 项目跳转链接  
+  *示例: "https://nuoxiana.cn"*
+```yaml
+- title:       "项目名称"      # 项目名称
+  description: "项目描述"      # 项目描述
+  url:         "项目链接"      # 点击跳转链接
+  iconify:     "项目图标"      # Iconify图标库标识符
+```
+
+## 🎖️ 技能展示 (skill)
+- **skillName**  
+  `string` | 技能名称  
+  *示例: "⚡Skills"*
+- **skillUrl**  
+  `string` | 使用 skillicons.dev 提供的图标生成链接  
+  *示例: "https://skillicons.dev/icons?perline=15&i=ae,apple,au"*
+
+## 📊 贪吃蛇贡献图 (githubSnake)
+- **githubSnake**  
+  `string` | 使用 github.com/Platane/snk 的贡献图生成代码  
+  *示例: "https://raw.gitmirror.com/nuoxi4n/nuoxi4n/main/assets/github-contribution-grid-snake-dark.svg"*
+
+## ©️ 底部版权 (footer)
+- **footer**  
+  `string` | 可以使用html代码  
+  *示例: "```<p>© 2020 <a href=\"https://nuoxiana.cn\">nuoxian</a>.```"*
+
 ## 🎵 音乐设置 (musicPlayer)
 - **enabled**  
   `boolean` | 是否启用音乐播放器  
@@ -61,54 +113,18 @@
   `string` | 存储播放器设置的 localStorage 键  
   *示例: "metingjs"*
 
-## 👤 个人资料 (Profile)
-- **name**  
-  `string` | 个人昵称/用户名，支持html代码  
-  *示例: "```Hello, I'm <span class=\"text-gradient\">nuoxian</span>```"*
-- **title**  
-  `string` | 网站标题  
-  *示例: "Hi, I'm nuoxian"*
-- **description**  
-  `string` | 个人简介描述  
-  *示例: "Hi, Welcome to nuoxian's HomePage 👋"*
-
-## 🌐 社交链接 (Social)
+## 📅 特殊日期 (specialDates)
+- **enableSpecialDates**  
+  `boolean` | 是否启用特殊日期  
+  *示例: `true` 或 `false`*
 ```yaml
-- name:        "按钮显示文本"  # 如：GitHub
-  hidden:      true/false     # 是否仅显示图标
-  iconify:     "图标代码"      # Iconify图标库标识符
-  url:         "https://"     # 点击跳转链接
-  hoverBg:     "渐变颜色"      # 悬停背景色，支持CSS渐变、
+- month:       1            # 月份
+  day:         1            # 日份
+  description: "元旦快乐！"  # 显示文字
 ```
 
-## 📁 项目展示 (Projects)
-- **projectsName**  
-  `string` | 项目名称  
-  *示例: "💻Projects"*
-- **projectsUrl**  
-  `string` | 项目跳转链接  
-  *示例: "https://nuoxiana.cn"*
 ```yaml
-- title:       "项目名称"      # 项目名称
-  description: "项目描述"      # 项目描述
-  url:         "项目链接"      # 点击跳转链接
-  iconify:     "项目图标"      # Iconify图标库标识符
+- startDate:   "10-1"         # 开始日期
+  endDate:     "10-7"         # 结束日期
+  description: "元旦快乐！"    # 显示文字
 ```
-
-## 🎖️ 技能展示 (skill)
-- **skillName**  
-  `string` | 技能名称  
-  *示例: "⚡Skills"*
-- **skill**  
-  `string` | 使用 skillicons.dev 提供的图标生成链接  
-  *示例: "https://skillicons.dev/icons?perline=15&i=ae,apple,au"*
-
-## 📊 贪吃蛇贡献图 (githubSnake)
-- **githubSnake**  
-  `string` | 使用 github.com/Platane/snk 的贡献图生成代码  
-  *示例: "https://raw.gitmirror.com/nuoxi4n/nuoxi4n/main/assets/github-contribution-grid-snake-dark.svg"*
-
-## ©️ 底部版权 (footer)
-- **footer**  
-  `string` | 可以使用html代码  
-  *示例: "```<p>© 2020 <a href=\"https://nuoxiana.cn\">nuoxian</a>.```"*

@@ -19,6 +19,12 @@
 </head>
 
 <body>
+  <!-- 加载遮罩 -->
+  <!-- <div id="loading-overlay" class="loading-overlay">
+    <div class="loading-spinner"></div>
+    <div class="loading-text">加载背景中...</div>
+  </div> -->
+
   <!-- 名称 -->
   <h1 class="name" data-config-html="profile.name"></h1>
   <!-- 描述 -->
@@ -37,14 +43,14 @@
     </a>
   </h3>
   <!-- 项目列表 -->
-  <div class="grid gap-4 grid-cols-1 sm:grid-cols-2" data-config-array="projects"></div>
+  <div class="grid gap-4 grid-cols-1 sm:grid-cols-2" data-config-array="projectsList"></div>
 
   <!-- 技能标题 -->
   <h3 class="flex items-center mt-8 mb-4 font-semibold text-2xl">
     <span class="flex-1" data-config-html="skillName">⚡Skills</span>
   </h3>
   <!-- 技能列表 -->
-  <img id="skill" data-config-src="skill" alt="技能图">
+  <img id="skill" data-config-src="skillUrl" alt="技能图">
 
   <!-- 底部Footer -->
   <footer class="mt-12 mb-12 text-sm opacity-40"></footer>
