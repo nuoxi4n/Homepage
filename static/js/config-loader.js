@@ -26,55 +26,8 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
   function applyConfig(config) {
-    // 特殊日期功能
-    const specialDatesEnabled = config.enableSpecialDates !== false;
-    if (specialDatesEnabled) {
-      // 日期检测逻辑
-      const today = new Date();
-      const month = today.getMonth() + 1;
-      const date = today.getDate();
-      const year = today.getFullYear();
-      
-      // 检查所有特殊日期
-      if (config.specialDates && Array.isArray(config.specialDates)) {
-        config.specialDates.forEach(specialDate => {
-          // 检查日期范围
-          let isInRange = false;
-          
-          // 单日节日
-          if (specialDate.day && !specialDate.startDate) {
-            if (specialDate.month === month && specialDate.day === date) {
-              isInRange = true;
-            }
-          }
-          // 多日节日（使用日期范围）
-          else if (specialDate.startDate && specialDate.endDate) {
-            // 处理不带年份的日期格式（如"10-1"）
-            const startDateParts = specialDate.startDate.split('-');
-            const endDateParts = specialDate.endDate.split('-');
-            
-            // 确保日期格式正确
-            if (startDateParts.length === 2 && endDateParts.length === 2) {
-              // 创建当前年份的日期对象
-              const startDate = new Date(year, parseInt(startDateParts[0]) - 1, parseInt(startDateParts[1]));
-              const endDate = new Date(year, parseInt(endDateParts[0]) - 1, parseInt(endDateParts[1]));
-              
-              // 包含结束日期
-              endDate.setDate(endDate.getDate() + 1);
-              
-              if (today >= startDate && today < endDate) {
-                isInRange = true;
-              }
-            }
-          }
-          
-          if (isInRange) {
-            // 应用节日描述
-            config.profile.description = specialDate.description;
-          }
-        });
-      }
-    }
+    // 处理特殊日期
+    handleSpecialDates(config);
 
     // 处理文本内容
     processSimpleElements(config, CONFIG_SELECTORS.text, el => {
@@ -248,6 +201,86 @@ document.addEventListener('DOMContentLoaded', function() {
 
     container.innerHTML = '';
     container.appendChild(metingEl);
+  }
+
+  // 特殊日期处理函数
+  function handleSpecialDates(config) {
+    if (config.enableSpecialDates === false) return;
+    if (!Array.isArray(config.specialDates)) return;
+    
+    const today = new Date();
+    const year = today.getFullYear();
+    const month = today.getMonth() + 1;
+    const date = today.getDate();
+    
+    for (const specialDate of config.specialDates) {
+      if (isDateMatch(specialDate, today, year, month, date)) {
+        // 应用节日描述（修改配置）
+        if (specialDate.description && config.profile) {
+          config.profile.description = specialDate.description;
+        }
+        
+        // 应用节日样式（直接操作DOM）
+        if (specialDate.cssStyle) {
+          applySpecialDayStyles(specialDate.cssStyle);
+        }
+        
+        // 找到匹配项后停止检查
+        break;
+      }
+    }
+  }
+
+  // 日期匹配检查
+  function isDateMatch(specialDate, today, year, month, date) {
+    // 单日节日检查
+    if (specialDate.day && !specialDate.startDate) {
+      return specialDate.month === month && specialDate.day === date;
+    }
+    
+    // 日期范围检查
+    if (specialDate.startDate && specialDate.endDate) {
+      const [startMonth, startDay] = specialDate.startDate.split('-').map(Number);
+      const [endMonth, endDay] = specialDate.endDate.split('-').map(Number);
+      
+      // 验证日期格式
+      if (isNaN(startMonth) || isNaN(startDay) || 
+          isNaN(endMonth) || isNaN(endDay)) {
+        console.warn('Invalid date format in special date:', specialDate);
+        return false;
+      }
+      
+      // 创建日期对象
+      const startDate = new Date(year, startMonth - 1, startDay);
+      const endDate = new Date(year, endMonth - 1, endDay + 1); // +1 包含结束日期
+      
+      return today >= startDate && today < endDate;
+    }
+    
+    return false;
+  }
+
+  // 应用特殊日期样式
+  function applySpecialDayStyles(cssStyle) {
+    const html = document.documentElement;
+    
+    // Tailwind 类名处理
+    if (!cssStyle.includes(':')) {
+      html.classList.add(...cssStyle.split(' '));
+      return;
+    }
+    
+    // CSS 样式处理
+    const styleId = 'special-day-styles';
+    let styleEl = document.getElementById(styleId);
+    
+    if (!styleEl) {
+      styleEl = document.createElement('style');
+      styleEl.id = styleId;
+      document.head.appendChild(styleEl);
+    }
+    
+    styleEl.textContent = `html { ${cssStyle} }`;
   }
 
   // 更新页脚

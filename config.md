@@ -121,10 +121,12 @@
 - month:       1            # 月份
   day:         1            # 日份
   description: "元旦快乐！"  # 显示文字
+  cssStyle:    "bg-gradient-to-r from-red-500 via-orange-400 to-yellow-300 text-white" # 样式
 ```
 
 ```yaml
 - startDate:   "10-1"         # 开始日期
   endDate:     "10-7"         # 结束日期
-  description: "元旦快乐！"    # 显示文字
+  description: "国庆快乐！"    # 显示文字
+  cssStyle:    "bg-gradient-to-r from-red-500 via-orange-400 to-yellow-300 text-white" # 样式
 ```

@@ -13,47 +13,68 @@
     {
       "month": 1,
       "day": 1,
-      "description": "🎉 元旦快乐！新的一年，新的开始！"
+      "description": "🎉 元旦快乐！新的一年，新的开始！",
+      "cssStyle": "bg-gradient-to-r from-red-500 via-orange-400 to-yellow-300 text-white"
     },
     {
       "month": 2,
       "day": 14,
-      "description": "💖 情人节快乐！愿你的生活充满爱与甜蜜！"
+      "description": "💖 情人节快乐！愿你的生活充满爱与甜蜜！",
+      "cssStyle": "bg-gradient-to-r from-pink-400 via-rose-400 to-red-300 text-white"
     },
     {
       "month": 5,
       "day": 1,
-      "description": "🌹 劳动节快乐！致敬每一位劳动者！"
+      "description": "🌹 劳动节快乐！致敬每一位劳动者！",
+      "cssStyle": "bg-gradient-to-r from-green-500 via-emerald-400 to-teal-300 text-white"
     },
     {
       "month": 5,
       "day": 4,
-      "description": "🎓 五四青年节快乐！青春无悔，奋斗不息！"
+      "description": "🎓 五四青年节快乐！青春无悔，奋斗不息！",
+      "cssStyle": "bg-gradient-to-r from-blue-500 via-indigo-400 to-purple-400 text-white"
     },
     {
       "month": 6,
       "day": 1,
-      "description": "🧒 儿童节快乐！愿每个孩子都能健康快乐成长！"
+      "description": "🧒 儿童节快乐！愿每个孩子都能健康快乐成长！",
+      "cssStyle": "bg-gradient-to-r from-yellow-300 via-orange-300 to-pink-300 text-black"
     },
     {
       "month": 8,
       "day": 1,
-      "description": "🎖️ 八一建军节！向中国人民解放军致敬！感谢你们保家卫国、守护和平！"
+      "description": "🎖️ 八一建军节！向中国人民解放军致敬！感谢你们保家卫国、守护和平！",
+      "cssStyle": "bg-gradient-to-r from-red-700 via-red-600 to-red-800 text-white"
     },
     {
       "month": 9,
       "day": 10,
-      "description": "👨‍🏫 教师节快乐！感谢所有辛勤的老师们！"
+      "description": "👨‍🏫 教师节快乐！感谢所有辛勤的老师们！",
+      "cssStyle": "bg-gradient-to-r from-purple-500 via-indigo-500 to-blue-500 text-white"
+    },
+    {
+      "month": 9,
+      "day": 18,
+      "description": "🕯️ 铭记历史，勿忘国耻！",
+      "cssStyle": "filter: grayscale(100%); -webkit-filter: grayscale(100%);"
     },
     {
       "startDate": "10-1",
       "endDate": "10-7",
-      "description": "🇨🇳 国庆节快乐！祝福祖国繁荣昌盛！"
+      "description": "🇨🇳 国庆节快乐！祝福祖国繁荣昌盛！",
+      "cssStyle": "background: linear-gradient(135deg, rgba(222, 41, 16, 0.2) 0%, rgba(255, 222, 0, 0.2) 100%); border-left: 4px solid #de2910; border-right: 4px solid #ffde00;"
+    },
+    {
+      "month": 12,
+      "day": 13,
+      "description": "🕯️ 南京大屠杀死难者国家公祭日，铭记历史，珍爱和平！",
+      "cssStyle": "filter: grayscale(100%); -webkit-filter: grayscale(100%);"
     },
     {
       "month": 12,
       "day": 25,
-      "description": "🎄 圣诞快乐！愿你拥有一个美好的假期！"
+      "description": "🎄 圣诞快乐！愿你拥有一个美好的假期！",
+      "cssStyle": "bg-gradient-to-r from-green-600 via-red-600 to-green-600 text-white"
     }
   ],
   "social": [
