@@ -10,6 +10,19 @@ document.addEventListener('DOMContentLoaded', function() {
     video: '[data-config-video]'
   };
 
+  // 获取配置值函数
+  const getConfigValue = (obj, path) => path.split('.').reduce((o, p) => o?.[p], obj);
+
+  // 防抖函数优化性能
+  const debounce = (func, wait = 100) => {
+    let timeout;
+    return (...args) => {
+      clearTimeout(timeout);
+      timeout = setTimeout(() => func.apply(this, args), wait);
+    };
+  };
+
+  // 加载配置
   fetch('config.json')
     .then(response => {
       if (!response.ok) throw new Error(`${response.status}`);
@@ -24,85 +37,92 @@ document.addEventListener('DOMContentLoaded', function() {
       console.error('Config Error: ', error);
       document.body.innerHTML = `<div class="flex items-center justify-center">Failed to load configuration: ${error.message}</div>`;
     });
-
+  
   function applyConfig(config) {
-    // 处理特殊日期
+    // 技能图片自适应
+    const skillImg = document.getElementById('skill');
+    if (skillImg && config.skillUrl) {
+      const updateSkillImage = debounce(() => {
+        const screenWidth = window.innerWidth;
+        let perline = 15;
+        
+        if (screenWidth < 640) perline = 8;
+        else if (screenWidth < 1024) perline = 12;
+        
+        skillImg.src = config.skillUrl.replace(/([?&])perline=\d+/, `$1perline=${perline}`);
+      });
+
+      updateSkillImage();
+      window.addEventListener('resize', updateSkillImage);
+    }
+
+    // 特殊日期处理
     handleSpecialDates(config);
 
     // 处理文本内容
-    processSimpleElements(config, CONFIG_SELECTORS.text, el => {
-      const value = getConfigValue(config, el.dataset.configText);
-      if (value) el.textContent = value;
-    });
+    processElements(config, CONFIG_SELECTORS.text, (el, value) => {
+      el.textContent = value;
+    }, 'configText');
 
     // 处理HTML内容
-    processSimpleElements(config, CONFIG_SELECTORS.html, el => {
-      const value = getConfigValue(config, el.dataset.configHtml);
-      if (value) el.innerHTML = value;
-    });
+    processElements(config, CONFIG_SELECTORS.html, (el, value) => {
+      el.innerHTML = value;
+    }, 'configHtml');
 
     // 处理链接内容
-    processSimpleElements(config, CONFIG_SELECTORS.href, el => {
-      const value = getConfigValue(config, el.dataset.configHref);
-      if (value) el.href = value;
-    });
+    processElements(config, CONFIG_SELECTORS.href, (el, value) => {
+      el.href = value;
+    }, 'configHref');
 
     // 处理数组内容
-    processSimpleElements(config, CONFIG_SELECTORS.array, el => {
-      const dataPath = el.dataset.configArray;
-      const items = getConfigValue(config, dataPath) || [];
-
+    processElements(config, CONFIG_SELECTORS.array, (el, value, dataPath) => {
       if (dataPath === 'social') {
-        renderSocialItems(el, items);
+        renderSocialItems(el, value);
       } else if (dataPath === 'projectsList') {
         renderProjects(el, Object.values(config.projectsList).flat());
       }
-    });
+    }, 'configArray');
 
-    // 处理样式和图片
-    processSimpleElements(config, CONFIG_SELECTORS.style, el => {
-      const [styleProp, dataPath] = el.dataset.configStyle.split(':');
-      const value = getConfigValue(config, dataPath);
-      if (value) el.style[styleProp] = `url('${value}')`;
-    });
+    // 处理样式
+    processElements(config, CONFIG_SELECTORS.style, (el, value) => {
+      const [styleProp] = el.dataset.configStyle.split(':');
+      el.style[styleProp] = `url('${value}')`;
+    }, 'configStyle');
 
-    // 处理链接内容
-    processSimpleElements(config, CONFIG_SELECTORS.src, el => {
-      const value = getConfigValue(config, el.dataset.configSrc);
-      if (value) el.src = value;
-    });
+    // 处理图片源
+    processElements(config, CONFIG_SELECTORS.src, (el, value) => {
+      el.src = value;
+    }, 'configSrc');
 
     // 处理音乐播放器
-    processSimpleElements(config, CONFIG_SELECTORS.music, container => {
-      const musicConfig = getConfigValue(config, 'musicPlayer');
-      renderMusicPlayer(container, musicConfig);
-    });
+    processElements(config, CONFIG_SELECTORS.music, (container, value) => {
+      renderMusicPlayer(container, value);
+    }, 'configMusic');
 
     // 处理视频
-    processSimpleElements(config, CONFIG_SELECTORS.video, el => {
-      const videoConfig = getConfigValue(config, el.dataset.configVideo);
-      if (videoConfig) {
-        const videoEl = document.createElement('video');
-        videoEl.src = videoConfig.src;
-        videoEl.controls = true;
-        el.innerHTML = '';
-        el.appendChild(videoEl);
-      }
-    });
+    processElements(config, CONFIG_SELECTORS.video, (el, value) => {
+      const videoEl = document.createElement('video');
+      videoEl.src = value.src;
+      videoEl.controls = true;
+      el.innerHTML = '';
+      el.appendChild(videoEl);
+    }, 'configVideo');
 
-    // 处理页脚和调试配置
+    // 页脚和调试配置
     updateFooter(config);
     processDebugConfig(config);
   }
 
   // 通用元素处理函数
-  function processSimpleElements(config, selector, processor) {
+  function processElements(config, selector, processor, dataAttr) {
     const elements = document.querySelectorAll(selector);
     if (!elements.length) return;
 
     elements.forEach(el => {
       try {
-        processor(el);
+        const path = el.dataset[dataAttr];
+        const value = getConfigValue(config, path);
+        if (value) processor(el, value, path);
       } catch (error) {
         console.error(`Error processing element:`, el, error);
       }
@@ -114,9 +134,9 @@ document.addEventListener('DOMContentLoaded', function() {
     container.classList.add('flex', 'flex-wrap');
     container.innerHTML = items.map(social => `
       <a class="social-item inline-flex text-current px-3 py-2 mt-2 mr-2 rounded-md transition-colors decoration-none bg-gray-500/20 hover:${social.hoverBg} hover:text-white" 
-         href="${social.url}" 
-         target="_blank"
-         aria-label="${social.name}">
+        href="${social.url}" 
+        target="_blank"
+        aria-label="${social.name}">
         <div class="text-lg">
           <span class="iconify" data-icon="${social.iconify}"></span>
         </div>
@@ -215,17 +235,15 @@ document.addEventListener('DOMContentLoaded', function() {
     
     for (const specialDate of config.specialDates) {
       if (isDateMatch(specialDate, today, year, month, date)) {
-        // 应用节日描述（修改配置）
+        // 应用节日描述
         if (specialDate.description && config.profile) {
           config.profile.description = specialDate.description;
         }
         
-        // 应用节日样式（直接操作DOM）
+        // 应用节日样式
         if (specialDate.cssStyle) {
           applySpecialDayStyles(specialDate.cssStyle);
         }
-        
-        // 找到匹配项后停止检查
         break;
       }
     }
@@ -243,16 +261,14 @@ document.addEventListener('DOMContentLoaded', function() {
       const [startMonth, startDay] = specialDate.startDate.split('-').map(Number);
       const [endMonth, endDay] = specialDate.endDate.split('-').map(Number);
       
-      // 验证日期格式
       if (isNaN(startMonth) || isNaN(startDay) || 
           isNaN(endMonth) || isNaN(endDay)) {
         console.warn('Invalid date format in special date:', specialDate);
         return false;
       }
       
-      // 创建日期对象
       const startDate = new Date(year, startMonth - 1, startDay);
-      const endDate = new Date(year, endMonth - 1, endDay + 1); // +1 包含结束日期
+      const endDate = new Date(year, endMonth - 1, endDay + 1);
       
       return today >= startDate && today < endDate;
     }
@@ -296,8 +312,6 @@ document.addEventListener('DOMContentLoaded', function() {
     window.debugConfig = config.debug || {};
   }
 
-  // 获取配置值
-  window.getConfigValue = function(obj, path) {
-    return path.split('.').reduce((o, p) => o?.[p], obj);
-  };
+  // 暴露配置值获取方法
+  window.getConfigValue = getConfigValue;
 });

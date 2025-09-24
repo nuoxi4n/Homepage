@@ -9,7 +9,7 @@
 
 最终效果：[https://nuoxiana.cn](https://nuoxiana.cn)
 
-![Preview](https://s2.loli.net/2025/09/02/xpZ42JemiFqK83k.png)
+<img src="https://s2.loli.net/2025/09/02/xpZ42JemiFqK83k.png" width="600px">
 
 ## ⚙️ 部署使用
 
@@ -44,6 +44,7 @@
 - HTML
 - CSS
 - JavaScript
+- DeepSeek AI
 
 ## 📃 License
 
