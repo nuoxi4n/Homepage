@@ -44,7 +44,7 @@
 - HTML
 - CSS
 - JavaScript
-- DeepSeek AI
+- DeepSeek
 
 ## 📃 License
 

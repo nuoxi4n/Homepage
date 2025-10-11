@@ -60,7 +60,7 @@
   `string` | 可以使用html代码  
   *示例: "```<p>© 2020 <a href=\"https://nuoxiana.cn\">nuoxian</a>.```"*
 
-## 🎵 音乐设置 (musicPlayer)
+## 🎵 音乐设置 (music)
 - **enabled**  
   `boolean` | 是否启用音乐播放器  
   *示例: `true` 或 `false`*
@@ -121,12 +121,14 @@
 - month:       1            # 月份
   day:         1            # 日份
   description: "元旦快乐！"  # 显示文字
-  cssStyle:    "bg-gradient-to-r from-red-500 via-orange-400 to-yellow-300 text-white" # 样式
+  style:    "bg-gradient-to-r from-red-500 via-orange-400 to-yellow-300 text-white" # 样式
+  "target": "global"        # 目标元素
 ```
 
 ```yaml
 - startDate:   "10-1"         # 开始日期
   endDate:     "10-7"         # 结束日期
   description: "国庆快乐！"    # 显示文字
-  cssStyle:    "bg-gradient-to-r from-red-500 via-orange-400 to-yellow-300 text-white" # 样式
+  style:    "bg-gradient-to-r from-red-500 via-orange-400 to-yellow-300 text-white" # 样式
+  "target": "description"     # 目标元素
 ```

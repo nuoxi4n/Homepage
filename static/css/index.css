@@ -1,8 +1,10 @@
 :root {
-  --accent-gradient: linear-gradient(120deg, 
+  --accent-gradient: linear-gradient(
+    120deg, 
     #6366F1, 
     #8B5CF6 30%, 
-    #EC4899 60%);
+    #EC4899 60%
+  );
 }
 
 html {
@@ -34,6 +36,7 @@ body {
   background-image: var(--accent-gradient);
 }
 
+/* ===== 动画定义 ===== */
 @keyframes backgroundSizeAnimation {
   0%   { background-position: 0% 50%; }
   25%  { background-position: 50% 50%; }
@@ -42,8 +45,47 @@ body {
   100% { background-position: 0% 50%; }
 }
 
-/* TailwindCSS样式 */
+@keyframes sparkle {
+  0%   { opacity: 1; }
+  50%  { opacity: 0.8; text-shadow: 0 0 15px rgba(255, 0, 0, 0.5); }
+  100% { opacity: 1; }
+}
 
+@keyframes pulse {
+  0%   { transform: scale(1); }
+  50%  { transform: scale(1.02); }
+  100% { transform: scale(1); }
+}
+
+@keyframes wave {
+  0%   { transform: translateY(0); }
+  50%  { transform: translateY(-3px); }
+  100% { transform: translateY(0); }
+}
+
+@keyframes bounce {
+  0%   { transform: translateY(0); }
+  50%  { transform: translateY(-5px); }
+  100% { transform: translateY(0); }
+}
+
+@keyframes glow {
+  0%   { text-shadow: 0 0 10px rgba(222, 41, 16, 0.3); }
+  50%  { text-shadow: 0 0 20px rgba(222, 41, 16, 0.5); }
+  100% { text-shadow: 0 0 10px rgba(222, 41, 16, 0.3); }
+}
+
+@keyframes shimmer {
+  0%   { opacity: 1; }
+  50%  { opacity: 0.9; }
+  100% { opacity: 1; }
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ===== 通用样式 ===== */
 .instructions {
   line-height: 1.6;
   margin: 1rem 0;
@@ -55,24 +97,23 @@ body {
 }
 
 .text-current {
-  color:currentColor
+  color: currentColor;
 }
 
 .decoration-none {
-  text-decoration:none
+  text-decoration: none;
 }
 
-/* 音乐播放器样式 */
-
+/* ===== 音乐播放器样式 ===== */
 .aplayer .aplayer-title {
-  color:#000;
+  color: #000;
 }
 
 .aplayer .aplayer-list-title {
   color: #000;
 }
 
-/* 加载遮罩样式 */
+/* ===== 加载遮罩样式 ===== */
 .loading-overlay {
   position: fixed;
   top: 0;
@@ -102,6 +143,17 @@ body {
   font-size: 18px;
 }
 
-@keyframes spin {
-  to { transform: rotate(360deg); }
+/* ===== Emoji 样式保护 ===== */
+.instructions::before,
+.instructions::after {
+  font-family: "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", sans-serif;
+  display: inline-block;
+}
+
+.instructions span.emoji {
+  background-clip: initial !important;
+  -webkit-background-clip: initial !important;
+  color: initial !important;
+  text-shadow: none !important;
+  animation: none !important;
 }
