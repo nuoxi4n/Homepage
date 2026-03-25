@@ -22,10 +22,12 @@ console.log(
     return 'system';
   }
 
-  // Returns the resolved display mode ('dark' or 'light') for a given theme setting
+  // Returns the resolved display mode ('dark' or 'light') for a given theme setting.
+  // Mirrors the CSS rule: @media (prefers-color-scheme: light) so that the snake image
+  // always matches what the CSS actually renders (including 'no-preference' → dark default).
   function getEffectiveMode(theme) {
     if (theme === 'system') {
-      return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      return window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
     }
     return theme;
   }
@@ -84,8 +86,9 @@ console.log(
     updateUI(getTheme());
   });
 
-  // Update snake image when OS-level dark/light preference changes (system mode only)
-  var mql = window.matchMedia('(prefers-color-scheme: dark)');
+  // Update snake image when OS-level dark/light preference changes (system mode only).
+  // Listen on the 'light' mql so the change logic mirrors the CSS @media rule.
+  var mql = window.matchMedia('(prefers-color-scheme: light)');
   var handleColorSchemeChange = function () {
     if (getTheme() === 'system') {
       updateSnakeImage('system');

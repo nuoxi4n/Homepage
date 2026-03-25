@@ -13,12 +13,14 @@ document.addEventListener('DOMContentLoaded', function() {
   const getConfigValue = (obj, path) => 
     path.split('.').reduce((o, p) => o?.[p], obj);
 
-  // Returns 'dark' or 'light' based on current theme (respects system preference)
+  // Returns 'dark' or 'light' based on current theme (respects system preference).
+  // Uses the same @media (prefers-color-scheme: light) condition as the CSS so that
+  // the resolved mode always matches what the stylesheet actually renders.
   function getEffectiveThemeMode() {
     const attr = document.documentElement.getAttribute('data-theme');
     if (attr === 'light') return 'light';
     if (attr === 'dark') return 'dark';
-    return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    return window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
   }
 
   const debounce = (func, wait = 100) => {
