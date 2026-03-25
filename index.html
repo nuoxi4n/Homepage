@@ -8,7 +8,12 @@
   <meta name="description" itemprop="description" content="nuoxian's HomePages.">
   <meta name="keywords" content="nuoxian,诺仙仙君,个人主页,主页,home,index,homepage,page">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-  <!-- DNS Prefetch -->
+  <!-- 提前应用主题，避免闪白 -->
+  <script>(function(){var t=localStorage.getItem('theme-preference');if(t&&t!=='system')document.documentElement.setAttribute('data-theme',t);}());</script>
+  <!-- DNS Prefetch & Preconnect -->
+  <link rel="preconnect" href="https://cdnjs.loli.net">
+  <link rel="preconnect" href="https://fonts.loli.net">
+  <link rel="preconnect" href="https://gstatic.loli.net">
   <link rel="dns-prefetch" href="//api.nxvav.cn">
   <link rel="dns-prefetch" href="//fonts.loli.net">
   <link rel="dns-prefetch" href="//gstatic.loli.net">
@@ -23,12 +28,6 @@
 </head>
 
 <body>
-  <!-- 加载遮罩 -->
-  <!-- <div id="loading-overlay" class="loading-overlay">
-    <div class="loading-spinner"></div>
-    <div class="loading-text">加载中...</div>
-  </div> -->
-
   <!-- 名称 -->
   <h1 class="name" data-config-html="profile.name"></h1>
   <!-- 描述 -->
@@ -36,7 +35,7 @@
   <!-- 社交按钮  -->
   <div class="text-current" data-config-array="social"></div>
   <!-- Github贡献图  -->
-  <img id="github-snake" data-config-src="githubSnake" alt="Github活动贡献图">
+  <img id="github-snake" data-config-src="githubSnake" alt="Github活动贡献图" loading="lazy">
 
   <!-- 项目标题 -->
   <h3 class="flex items-center mt-8 mb-4 font-semibold text-2xl">
@@ -54,7 +53,7 @@
     <span class="flex-1" data-config-html="skillName">⚡Skills</span>
   </h3>
   <!-- 技能列表 -->
-  <img id="skill" data-config-src="skillUrl" alt="技能图">
+  <img id="skill" data-config-src="skillUrl" alt="技能图" loading="lazy">
 
   <!-- 底部Footer -->
   <footer class="mt-12 mb-12 text-sm opacity-40"></footer>
@@ -62,15 +61,22 @@
   <!-- 音乐播放器 -->
   <div data-config-music="music"></div>
 
+  <!-- 主题切换按钮 -->
+  <button id="theme-toggle" aria-label="切换主题">
+    <span class="iconify theme-icon-light" data-icon="ri:sun-line"></span>
+    <span class="iconify theme-icon-dark" data-icon="ri:moon-line"></span>
+    <span class="iconify theme-icon-system" data-icon="ri:computer-line"></span>
+  </button>
+
   <!-- APlayerJS -->
-  <script src="https://cdnjs.loli.net/ajax/libs/aplayer/1.10.1/APlayer.min.js"></script>
+  <script src="https://cdnjs.loli.net/ajax/libs/aplayer/1.10.1/APlayer.min.js" defer></script>
   <!-- iconify -->
   <script src="https://cdnjs.loli.net/ajax/libs/iconify/3.1.1/iconify.min.js"></script>
   <!-- MetingJS -->
-  <script src="https://cdnjs.loli.net/ajax/libs/meting/2.0.2/Meting.min.js"></script>
+  <script src="https://cdnjs.loli.net/ajax/libs/meting/2.0.2/Meting.min.js" defer></script>
   <!-- 脚本加载 -->
-  <script src="static/js/config-loader.js"></script>
-  <script src="static/js/script.js"></script>
-  <script src="scripts.js"></script>
+  <script src="static/js/config-loader.js" defer></script>
+  <script src="static/js/script.js" defer></script>
+  <script src="scripts.js" defer></script>
 </body>
 </html>

@@ -4,6 +4,46 @@ console.log(
   "color:#fff;background:#f8f8f8;padding:5px 10px 5px 0px;"
 );
 
+// ===== 主题切换功能 =====
+(function initTheme() {
+  // NOTE: 此键名必须与 index.html <head> 内联脚本中的键名保持一致
+  const STORAGE_KEY = 'theme-preference';
+  const THEMES = ['system', 'light', 'dark'];
+  const TITLES = { system: '当前：跟随系统', light: '当前：浅色模式', dark: '当前：深色模式' };
+
+  function getTheme() {
+    return localStorage.getItem(STORAGE_KEY) || 'system';
+  }
+
+  function applyTheme(theme) {
+    const html = document.documentElement;
+    if (theme === 'system') {
+      html.removeAttribute('data-theme');
+    } else {
+      html.setAttribute('data-theme', theme);
+    }
+    localStorage.setItem(STORAGE_KEY, theme);
+    const btn = document.getElementById('theme-toggle');
+    if (btn) btn.title = TITLES[theme] || '';
+  }
+
+  function cycleTheme() {
+    const current = getTheme();
+    const next = THEMES[(THEMES.indexOf(current) + 1) % THEMES.length];
+    applyTheme(next);
+  }
+
+  // 初始主题已由 <head> 内联脚本提前应用（避免 FOUC）
+  // 这里只需初始化按钮状态
+  document.addEventListener('DOMContentLoaded', function () {
+    const btn = document.getElementById('theme-toggle');
+    if (btn) {
+      btn.title = TITLES[getTheme()] || '';
+      btn.addEventListener('click', cycleTheme);
+    }
+  });
+}());
+
 // ===== FPS 显示功能 =====
 function initFPS() {
   // 创建 FPS 元素
