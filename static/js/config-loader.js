@@ -183,19 +183,24 @@ document.addEventListener('DOMContentLoaded', function() {
       </a>
     `).join('');
 
-    // Theme toggle button — last item in the social row
-    const themeBtn = document.createElement('button');
-    themeBtn.id = 'theme-toggle';
-    themeBtn.className = 'social-item inline-flex items-center text-current px-3 py-2 mt-2 mr-2 rounded-md transition-colors bg-gray-500/20 hover:bg-gray-500/40 cursor-pointer border-0';
-    themeBtn.setAttribute('aria-label', '切换主题');
-    themeBtn.innerHTML = `
-      <div class="text-lg">
-        <span class="iconify theme-icon-light" data-icon="ri:sun-line"></span>
-        <span class="iconify theme-icon-dark" data-icon="ri:moon-line"></span>
-        <span class="iconify theme-icon-system" data-icon="ri:computer-line"></span>
-      </div>
+    // Theme toggle segmented control — last item in the social row
+    const themeControl = document.createElement('div');
+    themeControl.id = 'theme-toggle';
+    themeControl.setAttribute('role', 'group');
+    themeControl.setAttribute('aria-label', '切换主题');
+    themeControl.className = 'inline-flex items-center mt-2 mr-2 rounded-md overflow-hidden bg-gray-500/20';
+    themeControl.innerHTML = `
+      <button class="theme-seg" data-theme-value="light" title="浅色模式">
+        <span class="iconify" data-icon="ri:sun-line"></span>
+      </button>
+      <button class="theme-seg" data-theme-value="dark" title="深色模式">
+        <span class="iconify" data-icon="ri:moon-line"></span>
+      </button>
+      <button class="theme-seg" data-theme-value="system" title="跟随系统">
+        <span class="iconify" data-icon="ri:computer-line"></span>
+      </button>
     `;
-    container.appendChild(themeBtn);
+    container.appendChild(themeControl);
   }
 
   function renderProjects(container, projects) {

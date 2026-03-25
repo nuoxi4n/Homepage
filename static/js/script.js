@@ -9,7 +9,6 @@ console.log(
   // NOTE: 此键名必须与 index.html <head> 内联脚本中的键名保持一致
   const STORAGE_KEY = 'theme-preference';
   const THEMES = ['system', 'light', 'dark'];
-  const TITLES = { system: '跟随系统', light: '浅色模式', dark: '深色模式' };
 
   function getTheme() {
     try {
@@ -41,8 +40,10 @@ console.log(
   }
 
   function updateUI(theme) {
-    const btn = document.getElementById('theme-toggle');
-    if (btn) btn.title = TITLES[theme] || '';
+    // Highlight the active segment in the segmented control
+    document.querySelectorAll('#theme-toggle .theme-seg').forEach(seg => {
+      seg.classList.toggle('active', seg.dataset.themeValue === theme);
+    });
     updateSnakeImage(theme);
   }
 
@@ -68,20 +69,15 @@ console.log(
     updateUI(theme);
   }
 
-  function cycleTheme() {
-    const current = getTheme();
-    const next = THEMES[(THEMES.indexOf(current) + 1) % THEMES.length];
-    applyTheme(next);
-  }
-
-  // Event delegation — works even though the button is rendered async by config-loader
+  // Event delegation — clicking a segment sets that theme directly
   document.addEventListener('click', function (e) {
-    if (e.target.closest('#theme-toggle')) {
-      cycleTheme();
+    const seg = e.target.closest('[data-theme-value]');
+    if (seg && e.target.closest('#theme-toggle')) {
+      applyTheme(seg.dataset.themeValue);
     }
   });
 
-  // Initialize button title and snake image once config (and the button) is loaded
+  // Initialize segment highlight once config (and the control) is loaded
   window.addEventListener('configLoaded', function () {
     updateUI(getTheme());
   });

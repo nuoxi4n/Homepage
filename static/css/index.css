@@ -129,26 +129,26 @@ body {
   color: #000;
 }
 
-/* ===== 主题切换图标 ===== */
-.theme-icon-light,
-.theme-icon-dark,
-.theme-icon-system {
-  display: none;
+/* ===== 主题切换分段控件 ===== */
+.theme-seg {
+  padding: 0.5rem 0.75rem;
+  font-size: 1.125rem;
+  line-height: 1;
+  border: none;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+  opacity: 0.45;
+  transition: opacity 0.15s ease, background 0.15s ease;
 }
 
-/* 默认(系统模式): 显示电脑图标 */
-:root:not([data-theme]) .theme-icon-system {
-  display: inline;
+.theme-seg:hover {
+  opacity: 0.75;
 }
 
-/* 浅色模式: 显示太阳图标 */
-:root[data-theme="light"] .theme-icon-light {
-  display: inline;
-}
-
-/* 深色模式: 显示月亮图标 */
-:root[data-theme="dark"] .theme-icon-dark {
-  display: inline;
+.theme-seg.active {
+  opacity: 1;
+  background: rgba(128, 128, 128, 0.35);
 }
 
 /* ===== 加载遮罩样式 ===== */
