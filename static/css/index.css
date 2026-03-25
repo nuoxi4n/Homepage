@@ -151,6 +151,12 @@ body {
   background: rgba(128, 128, 128, 0.35);
 }
 
+.theme-seg:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: -2px;
+  background: rgba(128, 128, 128, 0.2);
+}
+
 /* ===== 加载遮罩样式 ===== */
 .loading-overlay {
   position: fixed;

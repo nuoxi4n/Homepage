@@ -71,8 +71,10 @@ console.log(
 
   // Event delegation — clicking a segment sets that theme directly
   document.addEventListener('click', function (e) {
-    const seg = e.target.closest('[data-theme-value]');
-    if (seg && e.target.closest('#theme-toggle')) {
+    const target = e.target instanceof Element ? e.target : (e.target && e.target.parentElement);
+    if (!target) return;
+    const seg = target.closest('[data-theme-value]');
+    if (seg && target.closest('#theme-toggle')) {
       applyTheme(seg.dataset.themeValue);
     }
   });
@@ -83,11 +85,17 @@ console.log(
   });
 
   // Update snake image when OS-level dark/light preference changes (system mode only)
-  window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function () {
+  var mql = window.matchMedia('(prefers-color-scheme: dark)');
+  var handleColorSchemeChange = function () {
     if (getTheme() === 'system') {
       updateSnakeImage('system');
     }
-  });
+  };
+  if (typeof mql.addEventListener === 'function') {
+    mql.addEventListener('change', handleColorSchemeChange);
+  } else if (typeof mql.addListener === 'function') {
+    mql.addListener(handleColorSchemeChange);
+  }
 }());
 
 // ===== FPS 显示功能 =====

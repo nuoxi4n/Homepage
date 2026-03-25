@@ -108,14 +108,24 @@ document.addEventListener('DOMContentLoaded', function() {
       config, 
       CONFIG_SELECTORS.src, 
       (el, value) => {
-        if (value && typeof value === 'object') {
+        const isArray = Array.isArray(value);
+        const hasDarkOrLightKeys =
+          value &&
+          typeof value === 'object' &&
+          !isArray &&
+          ('dark' in value || 'light' in value);
+
+        if (hasDarkOrLightKeys) {
           // Dark/light image URL support (e.g. githubSnake)
           el.dataset.darkSrc = value.dark || value.light || '';
           el.dataset.lightSrc = value.light || value.dark || '';
           const mode = getEffectiveThemeMode();
           el.src = mode === 'dark' ? el.dataset.darkSrc : el.dataset.lightSrc;
+        } else if (isArray) {
+          // Explicitly handle array values; use the first element if available
+          el.src = value.length > 0 ? value[0] : '';
         } else {
-          el.src = value;
+          el.src = value || '';
         }
       }, 
       'configSrc'
@@ -190,17 +200,34 @@ document.addEventListener('DOMContentLoaded', function() {
     themeControl.setAttribute('aria-label', '切换主题');
     themeControl.className = 'inline-flex items-center mt-2 mr-2 rounded-md overflow-hidden bg-gray-500/20';
     themeControl.innerHTML = `
-      <button class="theme-seg" data-theme-value="light" title="浅色模式">
+      <button type="button" class="theme-seg" data-theme-value="light" title="浅色模式" aria-pressed="false">
         <span class="iconify" data-icon="ri:sun-line"></span>
       </button>
-      <button class="theme-seg" data-theme-value="dark" title="深色模式">
+      <button type="button" class="theme-seg" data-theme-value="dark" title="深色模式" aria-pressed="false">
         <span class="iconify" data-icon="ri:moon-line"></span>
       </button>
-      <button class="theme-seg" data-theme-value="system" title="跟随系统">
+      <button type="button" class="theme-seg" data-theme-value="system" title="跟随系统" aria-pressed="false">
         <span class="iconify" data-icon="ri:computer-line"></span>
       </button>
     `;
     container.appendChild(themeControl);
+
+    // Keep aria-pressed in sync with the visual active state for assistive technologies
+    const themeButtons = themeControl.querySelectorAll('.theme-seg');
+
+    function updateThemeToggleAria() {
+      themeButtons.forEach(function (button) {
+        button.setAttribute('aria-pressed', button.classList.contains('active') ? 'true' : 'false');
+      });
+    }
+
+    // Observe class changes (e.g., .active added/removed) and resync ARIA state
+    if (window.MutationObserver) {
+      const observer = new MutationObserver(updateThemeToggleAria);
+      themeButtons.forEach(function (button) {
+        observer.observe(button, { attributes: true, attributeFilter: ['class'] });
+      });
+    }
   }
 
   function renderProjects(container, projects) {
