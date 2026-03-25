@@ -5,14 +5,30 @@
     #8B5CF6 30%, 
     #EC4899 60%
   );
+  --bg-color: #000000;
+  --text-color: #ffffff;
+  --theme-transition: background-color 0.3s ease, color 0.3s ease;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  transition: var(--theme-transition);
+}
+
+:root[data-theme="light"] {
+  --bg-color: #f9fafb;
+  --text-color: #111827;
+}
+
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme]) {
+    --bg-color: #f9fafb;
+    --text-color: #111827;
+  }
 }
 
 html {
   margin: auto;
   padding: 1.5rem;
   font-family: system-ui, sans-serif;
-  background-color: #000;
-  color: #fff;
   display: block;
 }
 
@@ -111,6 +127,34 @@ body {
 
 .aplayer .aplayer-list-title {
   color: #000;
+}
+
+/* ===== 主题切换分段控件 ===== */
+.theme-seg {
+  padding: 0.5rem 0.75rem;
+  font-size: 1.125rem;
+  line-height: 1;
+  border: none;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+  opacity: 0.45;
+  transition: opacity 0.15s ease, background 0.15s ease;
+}
+
+.theme-seg:hover {
+  opacity: 0.75;
+}
+
+.theme-seg.active {
+  opacity: 1;
+  background: rgba(128, 128, 128, 0.35);
+}
+
+.theme-seg:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: -2px;
+  background: rgba(128, 128, 128, 0.2);
 }
 
 /* ===== 加载遮罩样式 ===== */

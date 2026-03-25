@@ -52,8 +52,17 @@
 
 ## 📊 贪吃蛇贡献图 (githubSnake)
 - **githubSnake**  
-  `string` | 使用 github.com/Platane/snk 的贡献图生成代码  
-  *示例: "https://raw.gitmirror.com/nuoxi4n/nuoxi4n/main/assets/github-contribution-grid-snake-dark.svg"*
+  `string | object` | 使用 github.com/Platane/snk 的贡献图生成代码  
+  *字符串示例（单一URL，深浅色复用）:*  
+  `"https://raw.gitmirror.com/nuoxi4n/nuoxi4n/main/assets/github-contribution-grid-snake-dark.svg"`  
+  *对象示例（分别指定深色/浅色 URL）:*
+  ```json
+  "githubSnake": {
+    "dark": "https://raw.gitmirror.com/nuoxi4n/nuoxi4n/main/assets/github-contribution-grid-snake-dark.svg",
+    "light": "https://raw.gitmirror.com/nuoxi4n/nuoxi4n/main/assets/github-contribution-grid-snake.svg"
+  }
+  ```
+  *说明: 对象形式下，主题切换时自动替换对应URL；字符串形式向后兼容。*
 
 ## ©️ 底部版权 (footer)
 - **footer**  

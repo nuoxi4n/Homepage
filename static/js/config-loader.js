@@ -13,6 +13,16 @@ document.addEventListener('DOMContentLoaded', function() {
   const getConfigValue = (obj, path) => 
     path.split('.').reduce((o, p) => o?.[p], obj);
 
+  // Returns 'dark' or 'light' based on current theme (respects system preference).
+  // Uses the same @media (prefers-color-scheme: light) condition as the CSS so that
+  // the resolved mode always matches what the stylesheet actually renders.
+  function getEffectiveThemeMode() {
+    const attr = document.documentElement.getAttribute('data-theme');
+    if (attr === 'light') return 'light';
+    if (attr === 'dark') return 'dark';
+    return window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+  }
+
   const debounce = (func, wait = 100) => {
     let timeout;
     return (...args) => {
@@ -99,7 +109,30 @@ document.addEventListener('DOMContentLoaded', function() {
     processElements(
       config, 
       CONFIG_SELECTORS.src, 
-      (el, value) => { el.src = value; }, 
+      (el, value) => {
+        const isArray = Array.isArray(value);
+        const hasDarkOrLightKeys =
+          value &&
+          typeof value === 'object' &&
+          !isArray &&
+          ('dark' in value || 'light' in value);
+
+        if (hasDarkOrLightKeys) {
+          // Dark/light image URL support (e.g. githubSnake)
+          el.dataset.darkSrc = value.dark || value.light || '';
+          el.dataset.lightSrc = value.light || value.dark || '';
+          const mode = getEffectiveThemeMode();
+          el.src = mode === 'dark' ? el.dataset.darkSrc : el.dataset.lightSrc;
+          // Preload the alternate image immediately so theme switching is instant
+          const altSrc = mode === 'dark' ? el.dataset.lightSrc : el.dataset.darkSrc;
+          if (altSrc) { new Image().src = altSrc; }
+        } else if (isArray) {
+          // Explicitly handle array values; use the first element if available
+          el.src = value.length > 0 ? value[0] : '';
+        } else {
+          el.src = value || '';
+        }
+      }, 
       'configSrc'
     );
     
@@ -154,7 +187,7 @@ document.addEventListener('DOMContentLoaded', function() {
   function renderSocialItems(container, items) {
     container.classList.add('flex', 'flex-wrap');
     container.innerHTML = items.map(social => `
-      <a class="social-item inline-flex text-current px-3 py-2 mt-2 mr-2 rounded-md transition-colors decoration-none bg-gray-500/20 hover:${social.hoverBg} hover:text-white" 
+      <a class="social-item inline-flex items-center text-current px-3 py-2 mt-2 mr-2 rounded-md transition-colors decoration-none bg-gray-500/20 hover:${social.hoverBg} hover:text-white" 
         href="${social.url}" 
         target="_blank"
         aria-label="${social.name}">
@@ -164,6 +197,50 @@ document.addEventListener('DOMContentLoaded', function() {
         ${social.hidden ? '' : `<div class="text-sm ml-1 font-medium">${social.name}</div>`}
       </a>
     `).join('');
+
+    // Theme toggle segmented control — last item in the social row
+    const themeControl = document.createElement('div');
+    themeControl.id = 'theme-toggle';
+    themeControl.setAttribute('role', 'group');
+    themeControl.setAttribute('aria-label', '切换主题');
+    themeControl.className = 'inline-flex items-center mt-2 mr-2 rounded-md overflow-hidden bg-gray-500/20';
+    themeControl.innerHTML = `
+      <button type="button" class="theme-seg" data-theme-value="light" title="浅色模式" aria-label="浅色模式" aria-pressed="false">
+        <span class="iconify" data-icon="ri:sun-line"></span>
+      </button>
+      <button type="button" class="theme-seg" data-theme-value="dark" title="深色模式" aria-label="深色模式" aria-pressed="false">
+        <span class="iconify" data-icon="ri:moon-line"></span>
+      </button>
+      <button type="button" class="theme-seg" data-theme-value="system" title="跟随系统" aria-label="跟随系统" aria-pressed="false">
+        <span class="iconify" data-icon="ri:computer-line"></span>
+      </button>
+    `;
+    container.appendChild(themeControl);
+
+    // Keep aria-pressed in sync with the visual active state for assistive technologies
+    const themeButtons = themeControl.querySelectorAll('.theme-seg');
+
+    function updateThemeToggleAria() {
+      themeButtons.forEach(function (button) {
+        button.setAttribute('aria-pressed', button.classList.contains('active') ? 'true' : 'false');
+      });
+    }
+
+    // Initialize ARIA state based on the current active segment
+    updateThemeToggleAria();
+
+    // Observe class changes (e.g., .active added/removed) and resync ARIA state when supported.
+    // Fall back to click handlers to keep ARIA in sync when MutationObserver is unavailable.
+    if (window.MutationObserver) {
+      const observer = new MutationObserver(updateThemeToggleAria);
+      themeButtons.forEach(function (button) {
+        observer.observe(button, { attributes: true, attributeFilter: ['class'] });
+      });
+    } else {
+      themeButtons.forEach(function (button) {
+        button.addEventListener('click', updateThemeToggleAria);
+      });
+    }
   }
 
   function renderProjects(container, projects) {

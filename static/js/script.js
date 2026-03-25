@@ -4,6 +4,103 @@ console.log(
   "color:#fff;background:#f8f8f8;padding:5px 10px 5px 0px;"
 );
 
+// ===== 主题切换功能 =====
+(function initTheme() {
+  // NOTE: 此键名必须与 index.html <head> 内联脚本中的键名保持一致
+  const STORAGE_KEY = 'theme-preference';
+  const THEMES = ['system', 'light', 'dark'];
+
+  function getTheme() {
+    try {
+      const stored = localStorage.getItem(STORAGE_KEY);
+      if (stored && THEMES.includes(stored)) {
+        return stored;
+      }
+    } catch (e) {
+      // Ignore storage errors and fall back to default
+    }
+    return 'system';
+  }
+
+  // Returns the resolved display mode ('dark' or 'light') for a given theme setting.
+  // Mirrors the CSS rule: @media (prefers-color-scheme: light) so that the snake image
+  // always matches what the CSS actually renders (including 'no-preference' → dark default).
+  function getEffectiveMode(theme) {
+    if (theme === 'system') {
+      return window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+    }
+    return theme;
+  }
+
+  function updateSnakeImage(theme) {
+    const snake = document.getElementById('github-snake');
+    if (!snake || (!snake.dataset.darkSrc && !snake.dataset.lightSrc)) return;
+    const mode = getEffectiveMode(theme);
+    snake.src = mode === 'dark'
+      ? (snake.dataset.darkSrc || snake.dataset.lightSrc)
+      : (snake.dataset.lightSrc || snake.dataset.darkSrc);
+  }
+
+  function updateUI(theme) {
+    // Highlight the active segment in the segmented control
+    document.querySelectorAll('#theme-toggle .theme-seg').forEach(seg => {
+      seg.classList.toggle('active', seg.dataset.themeValue === theme);
+    });
+    updateSnakeImage(theme);
+  }
+
+  function applyTheme(theme) {
+    // Ensure the theme is always one of the allowed values
+    if (!THEMES.includes(theme)) {
+      theme = 'system';
+    }
+
+    const html = document.documentElement;
+    if (theme === 'system') {
+      html.removeAttribute('data-theme');
+    } else {
+      html.setAttribute('data-theme', theme);
+    }
+
+    try {
+      localStorage.setItem(STORAGE_KEY, theme);
+    } catch (e) {
+      // Ignore storage errors; theme is still applied to the DOM
+    }
+
+    updateUI(theme);
+  }
+
+  // Event delegation — clicking a segment sets that theme directly
+  document.addEventListener('click', function (e) {
+    const target = e.target instanceof Element ? e.target : (e.target && e.target.parentElement);
+    if (!target) return;
+    const seg = target.closest('[data-theme-value]');
+    if (seg && target.closest('#theme-toggle')) {
+      applyTheme(seg.dataset.themeValue);
+    }
+  });
+
+  // Initialize segment highlight once config (and the control) is loaded
+  window.addEventListener('configLoaded', function () {
+    updateUI(getTheme());
+  });
+
+  // Update snake image when OS-level dark/light preference changes (system mode only).
+  // Listen on the 'light' mql so the change logic mirrors the CSS @media rule.
+  var mql = window.matchMedia('(prefers-color-scheme: light)');
+  var handleColorSchemeChange = function () {
+    if (getTheme() === 'system') {
+      updateSnakeImage('system');
+    }
+  };
+  if (typeof mql.addEventListener === 'function') {
+    mql.addEventListener('change', handleColorSchemeChange);
+  } else if (typeof mql.addListener === 'function') {
+    mql.addListener(handleColorSchemeChange);
+  }
+}());
+
 // ===== FPS 显示功能 =====
 function initFPS() {
   // 创建 FPS 元素
