@@ -12,17 +12,36 @@ console.log(
   const TITLES = { system: '当前：跟随系统', light: '当前：浅色模式', dark: '当前：深色模式' };
 
   function getTheme() {
-    return localStorage.getItem(STORAGE_KEY) || 'system';
+    try {
+      const stored = localStorage.getItem(STORAGE_KEY);
+      if (stored && THEMES.includes(stored)) {
+        return stored;
+      }
+    } catch (e) {
+      // Ignore storage errors and fall back to default
+    }
+    return 'system';
   }
 
   function applyTheme(theme) {
+    // Ensure the theme is always one of the allowed values
+    if (!THEMES.includes(theme)) {
+      theme = 'system';
+    }
+
     const html = document.documentElement;
     if (theme === 'system') {
       html.removeAttribute('data-theme');
     } else {
       html.setAttribute('data-theme', theme);
     }
-    localStorage.setItem(STORAGE_KEY, theme);
+
+    try {
+      localStorage.setItem(STORAGE_KEY, theme);
+    } catch (e) {
+      // Ignore storage errors; theme is still applied to the DOM
+    }
+
     const btn = document.getElementById('theme-toggle');
     if (btn) btn.title = TITLES[theme] || '';
   }
