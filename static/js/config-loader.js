@@ -123,6 +123,9 @@ document.addEventListener('DOMContentLoaded', function() {
           el.dataset.lightSrc = value.light || value.dark || '';
           const mode = getEffectiveThemeMode();
           el.src = mode === 'dark' ? el.dataset.darkSrc : el.dataset.lightSrc;
+          // Preload the alternate image immediately so theme switching is instant
+          const altSrc = mode === 'dark' ? el.dataset.lightSrc : el.dataset.darkSrc;
+          if (altSrc) { new Image().src = altSrc; }
         } else if (isArray) {
           // Explicitly handle array values; use the first element if available
           el.src = value.length > 0 ? value[0] : '';
