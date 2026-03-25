@@ -13,6 +13,14 @@ document.addEventListener('DOMContentLoaded', function() {
   const getConfigValue = (obj, path) => 
     path.split('.').reduce((o, p) => o?.[p], obj);
 
+  // Returns 'dark' or 'light' based on current theme (respects system preference)
+  function getEffectiveThemeMode() {
+    const attr = document.documentElement.getAttribute('data-theme');
+    if (attr === 'light') return 'light';
+    if (attr === 'dark') return 'dark';
+    return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+  }
+
   const debounce = (func, wait = 100) => {
     let timeout;
     return (...args) => {
@@ -99,7 +107,17 @@ document.addEventListener('DOMContentLoaded', function() {
     processElements(
       config, 
       CONFIG_SELECTORS.src, 
-      (el, value) => { el.src = value; }, 
+      (el, value) => {
+        if (value && typeof value === 'object') {
+          // Dark/light image URL support (e.g. githubSnake)
+          el.dataset.darkSrc = value.dark || value.light || '';
+          el.dataset.lightSrc = value.light || value.dark || '';
+          const mode = getEffectiveThemeMode();
+          el.src = mode === 'dark' ? el.dataset.darkSrc : el.dataset.lightSrc;
+        } else {
+          el.src = value;
+        }
+      }, 
       'configSrc'
     );
     
@@ -154,7 +172,7 @@ document.addEventListener('DOMContentLoaded', function() {
   function renderSocialItems(container, items) {
     container.classList.add('flex', 'flex-wrap');
     container.innerHTML = items.map(social => `
-      <a class="social-item inline-flex text-current px-3 py-2 mt-2 mr-2 rounded-md transition-colors decoration-none bg-gray-500/20 hover:${social.hoverBg} hover:text-white" 
+      <a class="social-item inline-flex items-center text-current px-3 py-2 mt-2 mr-2 rounded-md transition-colors decoration-none bg-gray-500/20 hover:${social.hoverBg} hover:text-white" 
         href="${social.url}" 
         target="_blank"
         aria-label="${social.name}">
@@ -164,6 +182,20 @@ document.addEventListener('DOMContentLoaded', function() {
         ${social.hidden ? '' : `<div class="text-sm ml-1 font-medium">${social.name}</div>`}
       </a>
     `).join('');
+
+    // Theme toggle button — last item in the social row
+    const themeBtn = document.createElement('button');
+    themeBtn.id = 'theme-toggle';
+    themeBtn.className = 'social-item inline-flex items-center text-current px-3 py-2 mt-2 mr-2 rounded-md transition-colors bg-gray-500/20 hover:bg-gray-500/40 cursor-pointer border-0';
+    themeBtn.setAttribute('aria-label', '切换主题');
+    themeBtn.innerHTML = `
+      <div class="text-lg">
+        <span class="iconify theme-icon-light" data-icon="ri:sun-line"></span>
+        <span class="iconify theme-icon-dark" data-icon="ri:moon-line"></span>
+        <span class="iconify theme-icon-system" data-icon="ri:computer-line"></span>
+      </div>
+    `;
+    container.appendChild(themeBtn);
   }
 
   function renderProjects(container, projects) {

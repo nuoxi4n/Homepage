@@ -9,7 +9,7 @@ console.log(
   // NOTE: 此键名必须与 index.html <head> 内联脚本中的键名保持一致
   const STORAGE_KEY = 'theme-preference';
   const THEMES = ['system', 'light', 'dark'];
-  const TITLES = { system: '当前：跟随系统', light: '当前：浅色模式', dark: '当前：深色模式' };
+  const TITLES = { system: '跟随系统', light: '浅色模式', dark: '深色模式' };
 
   function getTheme() {
     try {
@@ -21,6 +21,29 @@ console.log(
       // Ignore storage errors and fall back to default
     }
     return 'system';
+  }
+
+  // Returns the resolved display mode ('dark' or 'light') for a given theme setting
+  function getEffectiveMode(theme) {
+    if (theme === 'system') {
+      return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    }
+    return theme;
+  }
+
+  function updateSnakeImage(theme) {
+    const snake = document.getElementById('github-snake');
+    if (!snake || (!snake.dataset.darkSrc && !snake.dataset.lightSrc)) return;
+    const mode = getEffectiveMode(theme);
+    snake.src = mode === 'dark'
+      ? (snake.dataset.darkSrc || snake.dataset.lightSrc)
+      : (snake.dataset.lightSrc || snake.dataset.darkSrc);
+  }
+
+  function updateUI(theme) {
+    const btn = document.getElementById('theme-toggle');
+    if (btn) btn.title = TITLES[theme] || '';
+    updateSnakeImage(theme);
   }
 
   function applyTheme(theme) {
@@ -42,8 +65,7 @@ console.log(
       // Ignore storage errors; theme is still applied to the DOM
     }
 
-    const btn = document.getElementById('theme-toggle');
-    if (btn) btn.title = TITLES[theme] || '';
+    updateUI(theme);
   }
 
   function cycleTheme() {
@@ -52,13 +74,22 @@ console.log(
     applyTheme(next);
   }
 
-  // 初始主题已由 <head> 内联脚本提前应用（避免 FOUC）
-  // 这里只需初始化按钮状态
-  document.addEventListener('DOMContentLoaded', function () {
-    const btn = document.getElementById('theme-toggle');
-    if (btn) {
-      btn.title = TITLES[getTheme()] || '';
-      btn.addEventListener('click', cycleTheme);
+  // Event delegation — works even though the button is rendered async by config-loader
+  document.addEventListener('click', function (e) {
+    if (e.target.closest('#theme-toggle')) {
+      cycleTheme();
+    }
+  });
+
+  // Initialize button title and snake image once config (and the button) is loaded
+  window.addEventListener('configLoaded', function () {
+    updateUI(getTheme());
+  });
+
+  // Update snake image when OS-level dark/light preference changes (system mode only)
+  window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function () {
+    if (getTheme() === 'system') {
+      updateSnakeImage('system');
     }
   });
 }());

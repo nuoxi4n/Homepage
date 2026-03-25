@@ -8,9 +8,12 @@
   --bg-color: #000000;
   --text-color: #ffffff;
   --theme-transition: background-color 0.3s ease, color 0.3s ease;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  transition: var(--theme-transition);
 }
 
-html[data-theme="light"] {
+:root[data-theme="light"] {
   --bg-color: #f9fafb;
   --text-color: #111827;
 }
@@ -26,10 +29,7 @@ html {
   margin: auto;
   padding: 1.5rem;
   font-family: system-ui, sans-serif;
-  background-color: var(--bg-color);
-  color: var(--text-color);
   display: block;
-  transition: var(--theme-transition);
 }
 
 body {
@@ -129,49 +129,25 @@ body {
   color: #000;
 }
 
-/* ===== 主题切换按钮 ===== */
-#theme-toggle {
-  position: fixed;
-  bottom: 1rem;
-  right: 1rem;
-  z-index: 50;
-  width: 2.5rem;
-  height: 2.5rem;
-  border: none;
-  border-radius: 50%;
-  background: rgba(128, 128, 128, 0.2);
-  color: var(--text-color);
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.125rem;
-  transition: background 0.2s ease;
-}
-
-#theme-toggle:hover {
-  background: rgba(128, 128, 128, 0.4);
-}
-
-/* 根据当前主题显示对应图标 */
-#theme-toggle .theme-icon-light,
-#theme-toggle .theme-icon-dark,
-#theme-toggle .theme-icon-system {
+/* ===== 主题切换图标 ===== */
+.theme-icon-light,
+.theme-icon-dark,
+.theme-icon-system {
   display: none;
 }
 
 /* 默认(系统模式): 显示电脑图标 */
-:root:not([data-theme]) #theme-toggle .theme-icon-system {
+:root:not([data-theme]) .theme-icon-system {
   display: inline;
 }
 
 /* 浅色模式: 显示太阳图标 */
-html[data-theme="light"] #theme-toggle .theme-icon-light {
+:root[data-theme="light"] .theme-icon-light {
   display: inline;
 }
 
 /* 深色模式: 显示月亮图标 */
-html[data-theme="dark"] #theme-toggle .theme-icon-dark {
+:root[data-theme="dark"] .theme-icon-dark {
   display: inline;
 }
 
