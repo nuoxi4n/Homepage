@@ -1,6 +1,0 @@
-127.0.0.1 - - [25/Mar/2026 05:02:23] "GET / HTTP/1.1" 200 -
-127.0.0.1 - - [25/Mar/2026 05:02:23] "GET /static/css/index.css HTTP/1.1" 200 -
-127.0.0.1 - - [25/Mar/2026 05:02:23] "GET /static/js/config-loader.js HTTP/1.1" 200 -
-127.0.0.1 - - [25/Mar/2026 05:02:23] "GET /static/js/script.js HTTP/1.1" 200 -
-127.0.0.1 - - [25/Mar/2026 05:02:23] "GET /scripts.js HTTP/1.1" 200 -
-127.0.0.1 - - [25/Mar/2026 05:02:23] "GET /config.json HTTP/1.1" 200 -

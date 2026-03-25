@@ -205,13 +205,13 @@ document.addEventListener('DOMContentLoaded', function() {
     themeControl.setAttribute('aria-label', '切换主题');
     themeControl.className = 'inline-flex items-center mt-2 mr-2 rounded-md overflow-hidden bg-gray-500/20';
     themeControl.innerHTML = `
-      <button type="button" class="theme-seg" data-theme-value="light" title="浅色模式" aria-pressed="false">
+      <button type="button" class="theme-seg" data-theme-value="light" title="浅色模式" aria-label="浅色模式" aria-pressed="false">
         <span class="iconify" data-icon="ri:sun-line"></span>
       </button>
-      <button type="button" class="theme-seg" data-theme-value="dark" title="深色模式" aria-pressed="false">
+      <button type="button" class="theme-seg" data-theme-value="dark" title="深色模式" aria-label="深色模式" aria-pressed="false">
         <span class="iconify" data-icon="ri:moon-line"></span>
       </button>
-      <button type="button" class="theme-seg" data-theme-value="system" title="跟随系统" aria-pressed="false">
+      <button type="button" class="theme-seg" data-theme-value="system" title="跟随系统" aria-label="跟随系统" aria-pressed="false">
         <span class="iconify" data-icon="ri:computer-line"></span>
       </button>
     `;
@@ -226,11 +226,19 @@ document.addEventListener('DOMContentLoaded', function() {
       });
     }
 
-    // Observe class changes (e.g., .active added/removed) and resync ARIA state
+    // Initialize ARIA state based on the current active segment
+    updateThemeToggleAria();
+
+    // Observe class changes (e.g., .active added/removed) and resync ARIA state when supported.
+    // Fall back to click handlers to keep ARIA in sync when MutationObserver is unavailable.
     if (window.MutationObserver) {
       const observer = new MutationObserver(updateThemeToggleAria);
       themeButtons.forEach(function (button) {
         observer.observe(button, { attributes: true, attributeFilter: ['class'] });
+      });
+    } else {
+      themeButtons.forEach(function (button) {
+        button.addEventListener('click', updateThemeToggleAria);
       });
     }
   }
